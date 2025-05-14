@@ -3,6 +3,4 @@ public class books {
     public String bookname;
     public String author;
 
-    
-    
 }
