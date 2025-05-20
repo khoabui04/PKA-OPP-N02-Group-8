@@ -126,6 +126,8 @@ Khi làm việc với dữ liệu trong bộ nhớ, dữ liệu cần được l
 
 Sinh viên có thể thêm các chức năng vào chương trình để ứng dụng phong phú hơn bằng cách thêm các nghiệp vụ cho bài toán (tùy chọn). Ví dụ: thông kê số lượt mượn theo độc giả, tìm sách được mượn nhiều nhất, cảnh báo trễ hạn trả sách,...
 
+link sơ đồ Class Diagram : https://drive.google.com/drive/folders/1ypbB4Mei8aR1sIvo2U265A7XeWCYO035?usp=sharing
+
 
 
 
