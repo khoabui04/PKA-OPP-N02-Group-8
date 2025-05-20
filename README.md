@@ -98,66 +98,47 @@ LibraryManagementSystem/
 └── pom.xml
 
 
+# Xây dựng ứng dụng quản lý thư viện sử dụng Java Spring Boot với các chức năng cơ bản sau:
 
- Quản lý Thư viện
-Nhóm 08
+Giao diện: Java Spring Boot (hoặc Java Console nếu không có frontend).
 
-Thành viên:
+Có chức năng quản lý sách:
 
-Nguyễn Thị Minh Hằng
+Thêm, sửa, xóa sách.
+
+Liệt kê thông tin về sách, có thể lọc ra các sách theo thể loại, năm xuất bản, tác giả.
+
+Có chức năng quản lý độc giả:
+
+Thêm, sửa, xóa độc giả.
+
+Có chức năng quản lý phiếu mượn sách:
+
+Thêm, sửa, xóa phiếu mượn.
+
+Có chức năng gán sách cho phiếu mượn, và liên kết độc giả với phiếu mượn.
+
+Dữ liệu được lưu trữ xuống file nhị phân.
+
+Cần tạo các lớp liên quan đến sách, độc giả, và phiếu mượn để đọc, ghi xuống 1 hay nhiều file.
+
+Khi làm việc với dữ liệu trong bộ nhớ, dữ liệu cần được lưu trữ dưới dạng các Collection tùy chọn như ArrayList, LinkedList, Map, ...
+
+Sinh viên có thể thêm các chức năng vào chương trình để ứng dụng phong phú hơn bằng cách thêm các nghiệp vụ cho bài toán (tùy chọn). Ví dụ: thông kê số lượt mượn theo độc giả, tìm sách được mượn nhiều nhất, cảnh báo trễ hạn trả sách,...
 
 
-Bùi Văn Khoa
 
 
-Đỗ Vân Khánh
 
 
-Nội dung bài tập:
-Mục tiêu:
 
-Xây dựng ứng dụng quản lý thư viện sử dụng Java Spring Boot với các chức năng cơ bản sau:
 
-Yêu cầu:
 
-Giao diện:
-Giao diện ứng dụng xây dựng trên nền Java Spring Boot.
 
-Chức năng quản lý sách:
 
-Thêm, sửa, xóa thông tin sách trong thư viện.
 
-Liệt kê danh sách sách, có thể lọc sách theo thể loại, tác giả hoặc năm xuất bản.
 
-Chức năng quản lý độc giả:
 
-Thêm, sửa, xóa thông tin độc giả.
-
-Liệt kê danh sách độc giả, có thể lọc theo nhóm độc giả (sinh viên, giảng viên, khách).
-
-Chức năng quản lý mượn trả:
-
-Quản lý việc mượn sách của độc giả.
-
-Quản lý việc trả sách, cập nhật tình trạng sách.
-
-Chức năng gán sách cho độc giả:
-
-Cho phép gán một hoặc nhiều sách cho một độc giả khi mượn.
-
-Lưu trữ dữ liệu:
-
-Dữ liệu được lưu trữ xuống file nhị phân để đảm bảo tính bền vững.
-
-Cần tạo các lớp liên quan đến Sách, Độc giả, Phiếu mượn để đọc, ghi xuống một hoặc nhiều file.
-
-Xử lý dữ liệu trong bộ nhớ:
-
-Khi làm việc với dữ liệu trong bộ nhớ, dữ liệu cần được lưu trữ dưới dạng các Collection tuỳ chọn như ArrayList, LinkedList, Map, … tùy yêu cầu bài toán.
-
-Mở rộng (tùy chọn):
-
-Sinh viên có thể thêm các chức năng mở rộng như báo cáo thống kê, tìm kiếm nâng cao, nhắc nhở quá hạn,... để làm ứng dụng phong phú hơn.
 
 
 
