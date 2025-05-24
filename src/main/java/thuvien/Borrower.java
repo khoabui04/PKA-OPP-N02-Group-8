@@ -1,60 +1,62 @@
 package thuvien;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
-public class Borrower {
-    private final String borrowerID;
-    private final String borrowerName;
-    private final List<Book> borrowedBooks;
+public class Book {
+    private String bookID;
+    private String bookName;
+    private String author;
 
-    public Borrower(String borrowerID, String borrowerName) {
-        this.borrowerID = borrowerID;
-        this.borrowerName = borrowerName;
-        this.borrowedBooks = new ArrayList<>();
+    public Book(String bookID, String bookName, String author) {
+        this.bookID = bookID;
+        this.bookName = bookName;
+        this.author = author;
     }
 
-    public String getBorrowerID() {
-        return borrowerID;
+    public String getBookID() {
+        return bookID;
     }
 
-    public String getBorrowerName() {
-        return borrowerName;
+    public String getBookName() {
+        return bookName;
     }
 
-    public List<Book> getBorrowedBooks() {
-        return Collections.unmodifiableList(borrowedBooks);
+    public String getAuthor() {
+        return author;
     }
 
-    public void borrowBook(Book book) {
-        borrowedBooks.add(book);
+    // Optional setters
+    public void setBookID(String bookID) {
+        this.bookID = bookID;
     }
 
-    public void returnBook(Book book) {
-        borrowedBooks.remove(book);
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override
     public String toString() {
-        return "Borrower{" +
-                "borrowerID='" + borrowerID + '\'' +
-                ", borrowerName='" + borrowerName + '\'' +
-                ", borrowedBooks=" + borrowedBooks +
+        return "Book{" +
+                "bookID='" + bookID + '\'' +
+                ", bookName='" + bookName + '\'' +
+                ", author='" + author + '\'' +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Borrower)) return false;
-        Borrower borrower = (Borrower) o;
-        return Objects.equals(borrowerID, borrower.borrowerID);
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return Objects.equals(bookID, book.bookID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(borrowerID);
+        return Objects.hash(bookID);
     }
 }

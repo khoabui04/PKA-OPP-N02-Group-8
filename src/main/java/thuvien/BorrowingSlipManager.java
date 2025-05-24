@@ -1,118 +1,119 @@
 package thuvien;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class BorrowingSlipManager {
-    private static final List<BorrowingSlip> slips = new ArrayList<>();
+    private static final List<BorrowingSlip> slipList = new ArrayList<>();
     private static final Scanner scanner = new Scanner(System.in);
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         while (true) {
-            System.out.println("\n--- QUẢN LÝ PHIẾU MƯỢN (CRUD) ---");
-            System.out.println("1. Thêm phiếu mượn");
-            System.out.println("2. Xem danh sách phiếu mượn");
-            System.out.println("3. Sửa phiếu mượn");
-            System.out.println("4. Xoá phiếu mượn");
-            System.out.println("5. Thoát");
+            System.out.println("\n------ MENU QUẢN LÝ PHIẾU MƯỢN ------");
+            System.out.println("1. Thêm phiếu mượn (CREATE)");
+            System.out.println("2. Xem danh sách phiếu mượn (READ)");
+            System.out.println("3. Sửa phiếu mượn (UPDATE)");
+            System.out.println("4. Xoá phiếu mượn (DELETE)");
+            System.out.println("0. Thoát");
             System.out.print("Chọn chức năng: ");
-            int chon = Integer.parseInt(scanner.nextLine());
+            int choice = Integer.parseInt(scanner.nextLine());
 
-            switch (chon) {
-                case 1 -> createSlip();
-                case 2 -> readSlips();
-                case 3 -> updateSlip();
-                case 4 -> deleteSlip();
-                case 5 -> System.exit(0);
-                default -> System.out.println("Lựa chọn không hợp lệ!");
-            }
+            switch (choice) {
+    case 1:
+        createSlip();
+        break;
+    case 2:
+        readSlips();
+        break;
+    case 3:
+        updateSlip();
+        break;
+    case 4:
+        deleteSlip();
+        break;
+    case 0:
+        System.out.println("Thoát chương trình.");
+        return;
+    default:
+        System.out.println("Lựa chọn không hợp lệ.");
+}
+
         }
     }
 
-    private static void createSlip() throws ParseException {
-        System.out.print("Nhập mã phiếu: ");
+    // CREATE
+    private static void createSlip() {
+        System.out.print("Nhập mã phiếu mượn: ");
         String slipID = scanner.nextLine();
 
         System.out.print("Nhập tên người mượn: ");
-        String name = scanner.nextLine();
-        System.out.print("Nhập mã người mượn: ");
+        String borrowerName = scanner.nextLine();
+        System.out.print("Nhập ID người mượn: ");
         String borrowerID = scanner.nextLine();
+        Borrower borrower = new Borrower(borrowerID, borrowerName);
 
-        System.out.print("Nhập tên sách: ");
-        String title = scanner.nextLine();
         System.out.print("Nhập mã sách: ");
         String bookID = scanner.nextLine();
+        System.out.print("Nhập tên sách: ");
+        String bookName = scanner.nextLine();
+        System.out.print("Nhập tên tác giả: ");
+        String author = scanner.nextLine();
+        Book book = new Book(bookID, bookName, author);
 
-        System.out.print("Nhập ngày mượn (dd/MM/yyyy): ");
-        Date borrowDate = sdf.parse(scanner.nextLine());
-        System.out.print("Nhập hạn trả (dd/MM/yyyy): ");
-        Date dueDate = sdf.parse(scanner.nextLine());
+        Date borrowDate = new Date(); // lấy ngày hiện tại
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(borrowDate);
+        cal.add(Calendar.DAY_OF_MONTH, 7); // hạn trả sau 7 ngày
+        Date dueDate = cal.getTime();
 
-        Borrower borrower = new Borrower(borrowerID, name);
-        Book book = new Book(bookID, title);
         BorrowingSlip slip = new BorrowingSlip(slipID, borrower, book, borrowDate, dueDate);
-        slips.add(slip);
-        System.out.println("✅ Đã thêm phiếu mượn.");
+        slipList.add(slip);
+        System.out.println("✅ Thêm phiếu mượn thành công.");
     }
 
+    // READ
     private static void readSlips() {
-        if (slips.isEmpty()) {
-            System.out.println("⚠️ Danh sách phiếu mượn trống.");
-        } else {
-            System.out.println("📄 Danh sách phiếu mượn:");
-            for (BorrowingSlip slip : slips) {
-                System.out.println(slip);
-            }
+        if (slipList.isEmpty()) {
+            System.out.println("📭 Không có phiếu mượn nào.");
+            return;
+        }
+
+        System.out.println("\n📋 DANH SÁCH PHIẾU MƯỢN:");
+        for (BorrowingSlip slip : slipList) {
+            System.out.println(slip);
         }
     }
 
-    private static void updateSlip() throws ParseException {
-        System.out.print("Nhập mã phiếu cần sửa: ");
-        String slipID = scanner.nextLine();
+    // UPDATE
+    private static void updateSlip() {
+        System.out.print("Nhập mã phiếu mượn cần sửa: ");
+        String id = scanner.nextLine();
 
-        for (int i = 0; i < slips.size(); i++) {
-            if (slips.get(i).getSlipID().equals(slipID)) {
-                System.out.print("Nhập tên mới người mượn: ");
-                String newName = scanner.nextLine();
-                System.out.print("Nhập mã mới người mượn: ");
-                String newBorrowerID = scanner.nextLine();
-
-                System.out.print("Nhập tên mới sách: ");
-                String newTitle = scanner.nextLine();
-                System.out.print("Nhập mã mới sách: ");
-                String newBookID = scanner.nextLine();
-
-                System.out.print("Nhập ngày mượn mới (dd/MM/yyyy): ");
-                Date newBorrowDate = sdf.parse(scanner.nextLine());
-                System.out.print("Nhập hạn trả mới (dd/MM/yyyy): ");
-                Date newDueDate = sdf.parse(scanner.nextLine());
-
-                Borrower borrower = new Borrower(newBorrowerID, newName);
-                Book book = new Book(newBookID, newTitle);
-                BorrowingSlip newSlip = new BorrowingSlip(slipID, borrower, book, newBorrowDate, newDueDate);
-
-                slips.set(i, newSlip);
-                System.out.println("✅ Đã cập nhật phiếu mượn.");
+        for (BorrowingSlip slip : slipList) {
+            if (slip.getSlipID().equals(id)) {
+                System.out.print("Nhập tên sách mới: ");
+                String newBookName = scanner.nextLine();
+                slip.getBook().setBookName(newBookName);  // cần setter trong Book
+                System.out.println("✅ Cập nhật thành công.");
                 return;
             }
         }
-        System.out.println("❌ Không tìm thấy mã phiếu.");
+        System.out.println("❌ Không tìm thấy phiếu mượn.");
     }
 
+    // DELETE
     private static void deleteSlip() {
-        System.out.print("Nhập mã phiếu cần xoá: ");
-        String slipID = scanner.nextLine();
-        Iterator<BorrowingSlip> iterator = slips.iterator();
+        System.out.print("Nhập mã phiếu mượn cần xoá: ");
+        String id = scanner.nextLine();
+
+        Iterator<BorrowingSlip> iterator = slipList.iterator();
         while (iterator.hasNext()) {
             BorrowingSlip slip = iterator.next();
-            if (slip.getSlipID().equals(slipID)) {
+            if (slip.getSlipID().equals(id)) {
                 iterator.remove();
-                System.out.println("✅ Đã xoá phiếu mượn.");
+                System.out.println("🗑️ Xoá thành công.");
                 return;
             }
         }
-        System.out.println("❌ Không tìm thấy mã phiếu.");
+        System.out.println("❌ Không tìm thấy phiếu mượn.");
     }
 }
