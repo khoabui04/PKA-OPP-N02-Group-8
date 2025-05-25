@@ -1,7 +1,6 @@
 {
     "liveServer.settings.multiRootWorkspaceName": "PKA-OPP-N02-Group-8",
     "java.project.sourcePaths": [
-        "thuvien.java",
         "src/main/java/thuvien"
     ]
 }
