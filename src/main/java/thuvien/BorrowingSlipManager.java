@@ -17,16 +17,24 @@ public class BorrowingSlipManager {
             System.out.print("Chọn chức năng: ");
             int choice = Integer.parseInt(scanner.nextLine());
 
-switch (choice) {
-    case 1 -> createSlip();
-    case 2 -> readSlips();
-    case 3 -> updateSlip();
-    case 4 -> deleteSlip();
-    case 0 -> {
+            switch (choice) {
+    case 1:
+        createSlip();
+        break;
+    case 2:
+        readSlips();
+        break;
+    case 3:
+        updateSlip();
+        break;
+    case 4:
+        deleteSlip();
+        break;
+    case 0:
         System.out.println("Thoát chương trình.");
         return;
-    }
-    default -> System.out.println("Lựa chọn không hợp lệ.");
+    default:
+        System.out.println("Lựa chọn không hợp lệ.");
 }
 
         }
