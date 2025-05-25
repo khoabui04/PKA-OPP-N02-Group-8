@@ -28,8 +28,6 @@ public class BorrowerManager {
         this.status = status;
     }
 
-    // Getters và setters, thêm/trả sách như mình đã gửi nhé
-
     public void addCurrentBorrowing(String slipID) {
         currentBorrowings.add(slipID);
     }
@@ -38,8 +36,6 @@ public class BorrowerManager {
         currentBorrowings.remove(slipID);
         borrowingHistory.add(slipID);
     }
-
-    // ... (bạn viết thêm getter/setter nếu cần)
 
     @Override
     public String toString() { 
