@@ -1,9 +1,10 @@
 package thuvien;
+
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Borrower {
+public class BorrowerManager {
     private String borrowerID;
     private String name;
     private String contactInfo;
@@ -15,7 +16,7 @@ public class Borrower {
     private double fineAmount;
     private String status;
 
-    public Borrower(String borrowerID, String name, String contactInfo, String address, 
+    public BorrowerManager(String borrowerID, String name, String contactInfo, String address, 
                     Date dateOfBirth, Date membershipDate, String status) {
         this.borrowerID = borrowerID;
         this.name = name;
@@ -44,7 +45,7 @@ public class Borrower {
 
     @Override
     public String toString() { 
-        return "Borrower{" +
+        return "BorrowerManager{" +
                 "ID='" + borrowerID + '\'' +
                 ", Name='" + name + '\'' +
                 ", Contact='" + contactInfo + '\'' +
