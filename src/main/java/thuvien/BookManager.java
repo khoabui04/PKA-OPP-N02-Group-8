@@ -15,26 +15,24 @@ public class BookManager {
             System.out.println("4. Xoá sách (DELETE)");
             System.out.println("0. Thoát");
             System.out.print("Chọn chức năng: ");
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice;
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("❌ Vui lòng nhập số hợp lệ.");
+                continue;
+            }
 
             switch (choice) {
-                case 1:
-                    createBook();
-                    break;
-                case 2:
-                    readBooks();
-                    break;
-                case 3:
-                    updateBook();
-                    break;
-                case 4:
-                    deleteBook();
-                    break;
-                case 0:
+                case 1 -> createBook();
+                case 2 -> readBooks();
+                case 3 -> updateBook();
+                case 4 -> deleteBook();
+                case 0 -> {
                     System.out.println("📚 Thoát chương trình quản lý sách.");
                     return;
-                default:
-                    System.out.println("❌ Lựa chọn không hợp lệ.");
+                }
+                default -> System.out.println("❌ Lựa chọn không hợp lệ.");
             }
         }
     }
