@@ -1,66 +1,77 @@
 package thuvien;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Book {
-    private String bookID;
-    private String bookName;
-    private String author;
+public class Borrower {
+    private String borrowerID;
+    private String borrowerName;
+    private String phoneNumber;
+    private final List<Book> borrowedBooks = new ArrayList<>();
 
-    public Book(String bookID, String bookName, String author) {
-        this.bookID = bookID;
-        this.bookName = bookName;
-        this.author = author;
+    public Borrower(String borrowerID, String borrowerName) {
+        this.borrowerID = borrowerID;
+        this.borrowerName = borrowerName;
     }
 
-    public String getBookID() {
-        return bookID;
+    public Borrower(String borrowerID, String borrowerName, String phoneNumber) {
+        this.borrowerID = borrowerID;
+        this.borrowerName = borrowerName;
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getBookName() {
-        return bookName;
+    public String getBorrowerID() {
+        return borrowerID;
     }
 
-    public String getAuthor() {
-        return author;
+    public void setBorrowerID(String borrowerID) {
+        this.borrowerID = borrowerID;
     }
 
-    // Optional setters
-    public void setBookID(String bookID) {
-        this.bookID = bookID;
+    public String getBorrowerName() {
+        return borrowerName;
     }
 
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
+    public void setBorrowerName(String borrowerName) {
+        this.borrowerName = borrowerName;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void borrowBook(Book book) {
+        borrowedBooks.add(book);
+    }
+
+    public List<Book> getBorrowedBooks() {
+        return borrowedBooks;
     }
 
     @Override
     public String toString() {
-        return "Book{" +
-                "bookID='" + bookID + '\'' +
-                ", bookName='" + bookName + '\'' +
-                ", author='" + author + '\'' +
+        return "Borrower{" +
+                "borrowerID='" + borrowerID + '\'' +
+                ", borrowerName='" + borrowerName + '\'' +
+                (phoneNumber != null ? ", phoneNumber='" + phoneNumber + '\'' : "") +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Book)) return false;
-        Book book = (Book) o;
-        return Objects.equals(bookID, book.bookID);
+        if (!(o instanceof Borrower)) return false;
+        Borrower that = (Borrower) o;
+        return Objects.equals(borrowerID, that.borrowerID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookID);
-    }
-
-    public void setBorrowedBooks(List<Book> borrowedBooks) {
-        this.borrowedBooks = borrowedBooks;
+        return Objects.hash(borrowerID);
     }
 }
