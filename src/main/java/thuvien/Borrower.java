@@ -8,7 +8,7 @@ public class Borrower {
     private String borrowerID;
     private String borrowerName;
     private String phoneNumber;
-    private List<Book> borrowedBooks = new ArrayList<>();
+    private final List<Book> borrowedBooks = new ArrayList<>();
 
     public Borrower(String borrowerID, String borrowerName) {
         this.borrowerID = borrowerID;
