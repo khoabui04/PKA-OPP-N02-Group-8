@@ -74,4 +74,8 @@ public class Borrower {
     public int hashCode() {
         return Objects.hash(borrowerID);
     }
+
+    public void setBorrowedBooks(List<Book> borrowedBooks) {
+        this.borrowedBooks = borrowedBooks;
+    }
 }
