@@ -1,33 +1,111 @@
 package thuvien;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class BookManager {
-    private List<Book> books;
+    private static final List<Book> bookList = new ArrayList<>();
+    private static final Scanner scanner = new Scanner(System.in);
 
-    public BookManager() {
-        books = new ArrayList<>();
-    }
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\n------ MENU QUẢN LÝ SÁCH ------");
+            System.out.println("1. Thêm sách (CREATE)");
+            System.out.println("2. Xem danh sách sách (READ)");
+            System.out.println("3. Sửa thông tin sách (UPDATE)");
+            System.out.println("4. Xoá sách (DELETE)");
+            System.out.println("0. Thoát");
+            System.out.print("Chọn chức năng: ");
+            int choice = Integer.parseInt(scanner.nextLine());
 
-    // Thêm sách mới
-    public void addBook(Book book) {
-        books.add(book);
-    }
-
-    // Xóa tất cả sách
-    public void clearBooks() {
-        books.clear();
-    }
-
-    // Hiển thị thông tin tất cả sách
-    public void printBooks() {
-        if (books.isEmpty()) {
-            System.out.println("Không có sách nào trong thư viện.");
-        } else {
-            for (Book book : books) {
-                System.out.println(book);
+            switch (choice) {
+                case 1:
+                    createBook();
+                    break;
+                case 2:
+                    readBooks();
+                    break;
+                case 3:
+                    updateBook();
+                    break;
+                case 4:
+                    deleteBook();
+                    break;
+                case 0:
+                    System.out.println("📚 Thoát chương trình quản lý sách.");
+                    return;
+                default:
+                    System.out.println("❌ Lựa chọn không hợp lệ.");
             }
         }
+    }
+
+    // CREATE
+    private static void createBook() {
+        System.out.print("Nhập mã sách: ");
+        String bookID = scanner.nextLine();
+
+        System.out.print("Nhập tên sách: ");
+        String bookName = scanner.nextLine();
+
+        System.out.print("Nhập tên tác giả: ");
+        String author = scanner.nextLine();
+
+        Book book = new Book(bookID, bookName, author);
+        bookList.add(book);
+        System.out.println("✅ Thêm sách thành công.");
+    }
+
+    // READ
+    private static void readBooks() {
+        if (bookList.isEmpty()) {
+            System.out.println("📭 Không có sách nào trong danh sách.");
+            return;
+        }
+
+        System.out.println("\n📖 DANH SÁCH SÁCH:");
+        for (Book book : bookList) {
+            System.out.println(book);
+        }
+    }
+
+    // UPDATE
+    private static void updateBook() {
+        System.out.print("Nhập mã sách cần sửa: ");
+        String bookID = scanner.nextLine();
+
+        for (Book book : bookList) {
+            if (book.getBookID().equals(bookID)) {
+                System.out.print("Nhập tên sách mới: ");
+                String newBookName = scanner.nextLine();
+                book.setBookName(newBookName);
+
+                System.out.print("Nhập tên tác giả mới: ");
+                String newAuthor = scanner.nextLine();
+                book.setAuthor(newAuthor);
+
+                System.out.println("✅ Cập nhật sách thành công.");
+                return;
+            }
+        }
+
+        System.out.println("❌ Không tìm thấy sách với mã đã nhập.");
+    }
+
+    // DELETE
+    private static void deleteBook() {
+        System.out.print("Nhập mã sách cần xoá: ");
+        String bookID = scanner.nextLine();
+
+        Iterator<Book> iterator = bookList.iterator();
+        while (iterator.hasNext()) {
+            Book book = iterator.next();
+            if (book.getBookID().equals(bookID)) {
+                iterator.remove();
+                System.out.println("🗑️ Xoá sách thành công.");
+                return;
+            }
+        }
+
+        System.out.println("❌ Không tìm thấy sách để xoá.");
     }
 }
