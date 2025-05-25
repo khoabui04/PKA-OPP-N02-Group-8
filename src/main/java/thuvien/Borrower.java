@@ -1,11 +1,20 @@
 package thuvien;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Borrower {
     private String borrowerID;
     private String borrowerName;
     private String phoneNumber;
+    private List<Book> borrowedBooks = new ArrayList<>();
+
+    // Constructor cho các trường hợp khác nhau
+    public Borrower(String borrowerID, String borrowerName) {
+        this.borrowerID = borrowerID;
+        this.borrowerName = borrowerName;
+    }
 
     public Borrower(String borrowerID, String borrowerName, String phoneNumber) {
         this.borrowerID = borrowerID;
@@ -13,6 +22,7 @@ public class Borrower {
         this.phoneNumber = phoneNumber;
     }
 
+    // Getter & Setter
     public String getBorrowerID() {
         return borrowerID;
     }
@@ -37,12 +47,21 @@ public class Borrower {
         this.phoneNumber = phoneNumber;
     }
 
+    // Quản lý sách mượn
+    public void borrowBook(Book book) {
+        borrowedBooks.add(book);
+    }
+
+    public List<Book> getBorrowedBooks() {
+        return borrowedBooks;
+    }
+
     @Override
     public String toString() {
         return "Borrower{" +
                 "borrowerID='" + borrowerID + '\'' +
                 ", borrowerName='" + borrowerName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
+                (phoneNumber != null ? ", phoneNumber='" + phoneNumber + '\'' : "") +
                 '}';
     }
 
