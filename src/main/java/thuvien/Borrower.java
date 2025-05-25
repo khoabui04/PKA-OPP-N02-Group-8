@@ -10,7 +10,6 @@ public class Borrower {
     private String phoneNumber;
     private List<Book> borrowedBooks = new ArrayList<>();
 
-    // Constructor cho các trường hợp khác nhau
     public Borrower(String borrowerID, String borrowerName) {
         this.borrowerID = borrowerID;
         this.borrowerName = borrowerName;
@@ -22,7 +21,6 @@ public class Borrower {
         this.phoneNumber = phoneNumber;
     }
 
-    // Getter & Setter
     public String getBorrowerID() {
         return borrowerID;
     }
@@ -47,7 +45,6 @@ public class Borrower {
         this.phoneNumber = phoneNumber;
     }
 
-    // Quản lý sách mượn
     public void borrowBook(Book book) {
         borrowedBooks.add(book);
     }
