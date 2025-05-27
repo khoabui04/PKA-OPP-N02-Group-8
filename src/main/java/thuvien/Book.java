@@ -17,21 +17,20 @@ public class Book {
         return bookID;
     }
 
-    public String getBookName() {
-        return bookName;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    // Optional setters
     public void setBookID(String bookID) {
         this.bookID = bookID;
     }
 
+    public String getBookName() {
+        return bookName;
+    }
+
     public void setBookName(String bookName) {
         this.bookName = bookName;
+    }
+
+    public String getAuthor() {
+        return author;
     }
 
     public void setAuthor(String author) {

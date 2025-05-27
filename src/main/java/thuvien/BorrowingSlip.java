@@ -18,14 +18,6 @@ public class BorrowingSlip {
         this.dueDate = new Date(dueDate.getTime());
     }
 
-    public BorrowingSlip(Book book, Date borrowDate, Borrower borrower, Date dueDate, String slipID) {
-        this.book = book;
-        this.borrowDate = borrowDate;
-        this.borrower = borrower;
-        this.dueDate = dueDate;
-        this.slipID = slipID;
-    }
-
     public String getSlipID() {
         return slipID;
     }
