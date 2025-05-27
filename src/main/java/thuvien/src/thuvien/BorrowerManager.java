@@ -1,4 +1,4 @@
-package thuvien;
+package src.thuvien;
 
 import java.util.*;
 
@@ -24,15 +24,23 @@ public class BorrowerManager {
             }
 
             switch (choice) {
-                case 1 -> createBorrower();
-                case 2 -> readBorrowers();
-                case 3 -> updateBorrower();
-                case 4 -> deleteBorrower();
-                case 0 -> {
+                case 1:
+                    createBorrower();
+                    break;
+                case 2:
+                    readBorrowers();
+                    break;
+                case 3:
+                    updateBorrower();
+                    break;
+                case 4:
+                    deleteBorrower();
+                    break;
+                case 0:
                     System.out.println("Thoát chương trình quản lý người mượn.");
                     return;
-                }
-                default -> System.out.println("Lựa chọn không hợp lệ.");
+                default:
+                    System.out.println("Lựa chọn không hợp lệ.");
             }
         }
     }

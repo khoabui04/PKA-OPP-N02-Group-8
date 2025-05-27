@@ -1,4 +1,4 @@
-package thuvien;
+package src.thuvien;
 
 public class Borrower {
     private String borrowerID;
