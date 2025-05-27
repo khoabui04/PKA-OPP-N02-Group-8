@@ -19,7 +19,7 @@ public class BorrowerManager {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
-                System.out.println("❌ Vui lòng nhập số hợp lệ.");
+                System.out.println("Vui lòng nhập số hợp lệ.");
                 continue;
             }
 
@@ -29,10 +29,10 @@ public class BorrowerManager {
                 case 3 -> updateBorrower();
                 case 4 -> deleteBorrower();
                 case 0 -> {
-                    System.out.println("📚 Thoát chương trình quản lý người mượn.");
+                    System.out.println("Thoát chương trình quản lý người mượn.");
                     return;
                 }
-                default -> System.out.println("❌ Lựa chọn không hợp lệ.");
+                default -> System.out.println("Lựa chọn không hợp lệ.");
             }
         }
     }
@@ -50,17 +50,17 @@ public class BorrowerManager {
 
         Borrower borrower = new Borrower(borrowerID, borrowerName, phoneNumber);
         borrowerList.add(borrower);
-        System.out.println("✅ Thêm người mượn thành công.");
+        System.out.println("Thêm người mượn thành công.");
     }
 
     // READ
     private static void readBorrowers() {
         if (borrowerList.isEmpty()) {
-            System.out.println("📭 Không có người mượn nào trong danh sách.");
+            System.out.println("Không có người mượn nào trong danh sách.");
             return;
         }
 
-        System.out.println("\n📖 DANH SÁCH NGƯỜI MƯỢN:");
+        System.out.println("\nDANH SÁCH NGƯỜI MƯỢN:");
         for (Borrower borrower : borrowerList) {
             System.out.println(borrower);
         }
@@ -81,12 +81,12 @@ public class BorrowerManager {
                 String newPhone = scanner.nextLine();
                 borrower.setPhoneNumber(newPhone);
 
-                System.out.println("✅ Cập nhật người mượn thành công.");
+                System.out.println("Cập nhật người mượn thành công.");
                 return;
             }
         }
 
-        System.out.println("❌ Không tìm thấy người mượn với mã đã nhập.");
+        System.out.println("Không tìm thấy người mượn với mã đã nhập.");
     }
 
     // DELETE
@@ -99,11 +99,11 @@ public class BorrowerManager {
             Borrower borrower = iterator.next();
             if (borrower.getBorrowerID().equals(borrowerID)) {
                 iterator.remove();
-                System.out.println("🗑️ Xoá người mượn thành công.");
+                System.out.println("Xoá người mượn thành công.");
                 return;
             }
         }
 
-        System.out.println("❌ Không tìm thấy người mượn để xoá.");
+        System.out.println("Không tìm thấy người mượn để xoá.");
     }
 }
