@@ -1,6 +1,10 @@
 package thuvien;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
+
 
 public class BookManager {
     private static final List<Book> bookList = new ArrayList<>();
@@ -94,7 +98,7 @@ public class BookManager {
         System.out.print("Nhập mã sách cần xoá: ");
         String bookID = scanner.nextLine();
 
-        Iterator<Book> iterator = bookList.iterator();
+       Iterator<Book> iterator = bookList.iterator();
         while (iterator.hasNext()) {
             Book book = iterator.next();
             if (book.getBookID().equals(bookID)) {

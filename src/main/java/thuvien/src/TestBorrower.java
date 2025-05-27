@@ -1,4 +1,7 @@
-package thuvien;
+package thuvien.src;
+import thuvien.Book;
+import thuvien.Borrower;
+
 
 public class TestBorrower {
     public static void main(String[] args) {

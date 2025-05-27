@@ -1,6 +1,14 @@
-package thuvien;
+package thuvien.src;
 
 import java.util.Date;
+import thuvien.Book;
+import thuvien.Borrower;
+import thuvien.BorrowingSlip;
+/**
+ * Test class for BorrowingSlip.
+ * This class demonstrates the creation and usage of a borrowing slip.
+ */
+
 
 public class TestBorrowingSlip {
     public static void main(String[] args) {
