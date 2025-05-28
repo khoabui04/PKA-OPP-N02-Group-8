@@ -1,4 +1,4 @@
-package thuvien.src;
+package thuvien;
 
 import thuvien.Book;
 

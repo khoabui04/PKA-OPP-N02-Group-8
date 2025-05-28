@@ -1,20 +1,11 @@
-package thuvien.src;
+package thuvien;
 
 import java.util.Date;
-import thuvien.Book;
-import thuvien.Borrower;
-import thuvien.BorrowingSlip;
-/**
- * Test class for BorrowingSlip.
- * This class demonstrates the creation and usage of a borrowing slip.
- */
-
 
 public class TestBorrowingSlip {
     public static void main(String[] args) {
         Book book = new Book("001", "KhoaPug", "Huy");
-        Borrower borrower = new Borrower("B001", "Nguyen Van A");
-        borrower.borrowBook(book);
+        Borrower borrower = new Borrower("B001", "Nguyen Van A", "0123456789");
 
         Date borrowDate = new Date();
         Date dueDate = new Date(borrowDate.getTime() + 7L * 24 * 60 * 60 * 1000);
@@ -23,7 +14,7 @@ public class TestBorrowingSlip {
 
         System.out.println("Slip ID: " + slip.getSlipID());
         System.out.println("Book: " + slip.getBook().getBookName());
-        System.out.println("Borrower: " + slip.getBorrower().getBorrowerName());
+        System.out.println("Borrower: " + slip.getBorrower());
         System.out.println("Borrow Date: " + slip.getBorrowDate());
         System.out.println("Due Date: " + slip.getDueDate());
     }
