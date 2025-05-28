@@ -1,6 +1,4 @@
-package thuvien.src.thuvien;
-g
-import thuvien.src.thuvien.Book;
+package src.thuvien;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,15 +28,23 @@ public class BookManager {
             }
 
             switch (choice) {
-                case 1 -> createBook();
-                case 2 -> readBooks();
-                case 3 -> updateBook();
-                case 4 -> deleteBook();
-                case 0 -> {
+                case 1:
+                 createBook();
+                 break;
+                case 2:
+                readBooks();
+                break;
+                case 3:
+                updateBook();
+                break;
+                case 4:
+                deleteBook();
+                break;
+                case 0:{
                     System.out.println("📚 Thoát chương trình quản lý sách.");
                     return;
                 }
-                default -> System.out.println("❌ Lựa chọn không hợp lệ.");
+                default:System.out.println("❌ Lựa chọn không hợp lệ.");
             }
         }
     }
@@ -113,3 +119,4 @@ public class BookManager {
         System.out.println("❌ Không tìm thấy sách để xoá.");
     }
 }
+
