@@ -1,4 +1,4 @@
-package thuvien;
+package src.thuvien;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,7 +44,10 @@ public class BookManager {
                     System.out.println("📚 Thoát chương trình quản lý sách.");
                     return;
                 }
-                default -> System.out.println("❌ Lựa chọn không hợp lệ.");
+                default:
+                    System.out.println("❌ Lựa chọn không hợp lệ.");
+                    break;
+                
             }
         }
     }
