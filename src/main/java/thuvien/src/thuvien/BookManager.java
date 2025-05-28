@@ -28,14 +28,9 @@ public class BookManager {
             }
 
             switch (choice) {
-                case 1:
-<<<<<<< HEAD
-                createBook();
-                break;
-=======
+                case 1
                  createBook();
                  break;
->>>>>>> bba4ff6c75c190cf0ecfa8a8199c5c4a9141b900
                 case 2:
                 readBooks();
                 break;
@@ -49,14 +44,10 @@ public class BookManager {
                     System.out.println("📚 Thoát chương trình quản lý sách.");
                     return;
                 }
-<<<<<<< HEAD
                 default:
                     System.out.println("❌ Lựa chọn không hợp lệ.");
                     break;
                 
-=======
-                default:System.out.println("❌ Lựa chọn không hợp lệ.");
->>>>>>> bba4ff6c75c190cf0ecfa8a8199c5c4a9141b900
             }
         }
     }

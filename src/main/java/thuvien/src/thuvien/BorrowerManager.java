@@ -2,6 +2,8 @@ package src.thuvien;
 
 import java.util.*;
 
+import src.thuvien.Borrower;
+
 public class BorrowerManager {
     private static final List<Borrower> borrowerList = new ArrayList<>();
     private static final Scanner scanner = new Scanner(System.in);
