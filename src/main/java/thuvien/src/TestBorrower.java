@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 package thuvien;
+=======
+package thuvien.src;
+
+import thuvien.Book;
+import thuvien.Borrower;
+
+>>>>>>> bba4ff6c75c190cf0ecfa8a8199c5c4a9141b900
 
 public class TestBorrower {
     public static void main(String[] args) {
