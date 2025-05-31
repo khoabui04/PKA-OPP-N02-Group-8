@@ -37,8 +37,8 @@ Lưu trữ dữ liệu: Dữ liệu được lưu trữ bằng các Collection n
 Chức năng mở rộng: Thống kê, cảnh báo trễ hạn, tìm sách mượn nhiều nhất...
 7. Sơ đồ UML
 
-Class Diagram
-Sequence Diagram
+Class Diagram: http://[https://drive.google.com/file/d/1nDPU4V0jP4qDLwa3WDVNuQa_KLGO881w/view?usp=sharing
+Sequence Diagram: http://drive.google.com/file/d/1nDPU4V0jP4qDLwa3WDVNuQa_KLGO881w/view?usp=sharing
 Activity Diagram (bổ sung nếu có)
 8. Hướng dẫn chạy chương trình
 
