@@ -4,41 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-// Lớp Book dùng cho kiểm thử
-class Book {
-    private final String id;
-    private String title;
-    private String author;
-
-    public Book(String id, String title, String author) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-    }
-
-    @Override
-    public String toString() {
-        return id + " - " + title + " - " + author;
-    }
-}
-
-// Lớp Borrower dùng cho kiểm thử
-class Borrower {
-    private final String id;
-    private String borrowerName;
-    private String phone;
-
-    public Borrower(String id, String borrowerName, String phone) {
-        this.id = id;
-        this.borrowerName = borrowerName;
-        this.phone = phone;
-    }
-
-    @Override
-    public String toString() {
-        return id + " - " + borrowerName + " - " + phone;
-    }
-}
 
 // Lớp BorrowingSlip dùng cho kiểm thử
 class BorrowingSlip {
