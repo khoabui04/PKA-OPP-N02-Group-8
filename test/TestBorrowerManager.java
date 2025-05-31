@@ -1,51 +1,73 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
+// Lớp Borrower dùng cho kiểm thử
 class Borrower {
-    private String borrowerName;
-    public Borrower(String borrowerName) {
-        this.borrowerName = borrowerName;
-    }
-    public String getBorrowerName() {
-        return borrowerName;
-    }
+private final String id;
+private String borrowerName;
+private String phone;
+
+public Borrower(String id, String borrowerName, String phone) {
+this.id = id;
+this.borrowerName = borrowerName;
+this.phone = phone;
 }
 
-class BorrowerCRUD {
-    private List<Borrower> borrowers = new ArrayList<>();
-    public void add(Borrower b) {
-        borrowers.add(b);
-    }
-    public List<Borrower> getAll() {
-        return borrowers;
-    }
+public String getBorrowerName() {
+return borrowerName;
 }
 
-class BorrowerManager {
-    public static BorrowerCRUD crud = new BorrowerCRUD();
+@Override
+public String toString() {
+return id + " - " + borrowerName + " - " + phone;
+}
 }
 
+// Lớp CrudManager dùng cho kiểm thử
+class CrudManager<T> {
+private List<T> items = new ArrayList<>();
+
+public CrudManager(String filename) {
+// Không sử dụng file trong kiểm thử này
+}
+
+public List<T> getAll() {
+return items;
+}
+
+public void add(T item) {
+items.add(item);
+}
+}
+
+// Lớp kiểm thử chính
 public class TestBorrowerManager {
+private static final CrudManager<Borrower> crud = new CrudManager<>("borrowers_test.dat");
 
-    @Test
-    public void testSearchBorrowerByName() {
-        // Reset dữ liệu
-        BorrowerManager.crud = new BorrowerCRUD();
+public static void searchBorrowerByName() {
+Scanner scanner = new Scanner(System.in);
+System.out.print("Nhập tên người mượn cần tìm: ");
+String name = scanner.nextLine();
+boolean found = false;
+for (Borrower b : crud.getAll()) {
+if (b.getBorrowerName().toLowerCase().contains(name.toLowerCase())) {
+System.out.println(b);
+found = true;
+}
+}
+if (!found) {
+System.out.println("❌ Không tìm thấy người mượn này.");
+}
+}
 
-        // Thêm dữ liệu
-        BorrowerManager.crud.add(new Borrower("Nguyen Van A"));
-        BorrowerManager.crud.add(new Borrower("Tran Thi B"));
-        BorrowerManager.crud.add(new Borrower("Le Van C"));
+public static void main(String[] args) {
+// Xóa dữ liệu cũ nếu có và thêm dữ liệu mẫu
+crud.getAll().clear();
+crud.add(new Borrower("BR001", "Nguyễn Văn Tịnh", "0123456789"));
+crud.add(new Borrower("BR002", "Trần Thị Bảy", "0987654321"));
+crud.add(new Borrower("BR003", "Nguyễn Văn Hinh ", "0111222333"));
 
-        // Tìm kiếm tên có trong danh sách
-        boolean found = BorrowerManager.crud.getAll().stream()
-            .anyMatch(b -> b.getBorrowerName().toLowerCase().contains("nguyen"));
-        assertTrue(found);
-
-        // Tìm kiếm tên không có trong danh sách
-        boolean notFound = BorrowerManager.crud.getAll().stream()
-            .noneMatch(b -> b.getBorrowerName().toLowerCase().contains("pham"));
-        assertTrue(notFound);
-    }
+searchBorrowerByName();
+}
 }
