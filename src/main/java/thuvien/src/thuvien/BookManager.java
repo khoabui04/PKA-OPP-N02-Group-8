@@ -29,8 +29,8 @@ public class BookManager {
 
             switch (choice) {
                 case 1
-                 createBook();
-                 break;
+                createBook();
+                break;
                 case 2:
                 readBooks();
                 break;
