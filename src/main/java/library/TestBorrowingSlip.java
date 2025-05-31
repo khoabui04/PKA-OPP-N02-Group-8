@@ -1,4 +1,4 @@
-package thuvien;
+package library;
 
 import java.util.Date;
 
@@ -14,7 +14,7 @@ public class TestBorrowingSlip {
 
         System.out.println("Slip ID: " + slip.getSlipID());
         System.out.println("Book: " + slip.getBook().getBookName());
-        System.out.println("Borrower: " + slip.getBorrower());
+        System.out.println("Borrower: " + slip.getBorrower().getBorrowerName());
         System.out.println("Borrow Date: " + slip.getBorrowDate());
         System.out.println("Due Date: " + slip.getDueDate());
     }

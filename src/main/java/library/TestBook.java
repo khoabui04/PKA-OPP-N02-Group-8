@@ -1,6 +1,4 @@
-package thuvien;
-
-import thuvien.Book;
+package library;
 
 public class TestBook {
     public static void main(String[] args) {
