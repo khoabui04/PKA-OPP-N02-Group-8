@@ -42,7 +42,7 @@ items.add(item);
 }
 
 // Lớp kiểm thử chính
-public class TestBorrowerManager {
+public class TestBorrowerManagerr {
 private static final CrudManager<Borrower> crud = new CrudManager<>("borrowers_test.dat");
 
 public static void searchBorrowerByName() {
