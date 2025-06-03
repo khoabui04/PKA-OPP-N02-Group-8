@@ -1,5 +1,5 @@
 public class Sequence {
-    private Object[] objects; // array of Object
+    private Object[] objects; 
     private int next = 0;
 
     public Sequence(int size) {
@@ -13,7 +13,6 @@ public class Sequence {
         }
     }
 
-    // inner class SSelector of Sequence
     private class SSelector implements Selector {
         int i = 0;
 
