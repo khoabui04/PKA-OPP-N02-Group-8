@@ -1,5 +1,7 @@
+package review;
+
 public class Sequence {
-    private Object[] objects; 
+    private Object[] objects;
     private int next = 0;
 
     public Sequence(int size) {
@@ -8,16 +10,16 @@ public class Sequence {
 
     public void add(Object x) {
         if (next < objects.length) {
-            objects[next] = x;
-            next++;
+            objects[next++] = x;
         }
     }
 
+    // Inner class SSelector implements Selector
     private class SSelector implements Selector {
-        int i = 0;
+        private int i = 0;
 
         public boolean end() {
-            return i == objects.length;
+            return i == next;
         }
 
         public Object current() {
@@ -25,7 +27,7 @@ public class Sequence {
         }
 
         public void next() {
-            if (i < objects.length) i++;
+            if (i < next) i++;
         }
     }
 

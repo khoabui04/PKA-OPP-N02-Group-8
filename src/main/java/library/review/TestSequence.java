@@ -1,3 +1,5 @@
+package review;
+
 public class TestSequence {
     public static void main(String[] args) {
         Sequence sequence = new Sequence(5);
