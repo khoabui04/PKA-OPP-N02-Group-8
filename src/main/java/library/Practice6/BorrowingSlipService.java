@@ -1,7 +1,8 @@
-package library.Practice6;
+package Practice6; 
 
 import java.util.ArrayList;
 import java.util.List;
+
 import library.BorrowingSlip;
 
 /**

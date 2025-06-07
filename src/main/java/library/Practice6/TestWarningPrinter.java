@@ -1,9 +1,10 @@
-package library.Practice6;
+package Practice6;
 
 import java.util.*;
-import library.BorrowingSlip;
-import library.Borrower;
+
 import library.Book;
+import library.Borrower;
+import library.BorrowingSlip;
 
 /**
  * Lớp kiểm thử chức năng cảnh báo sách gần đến hạn trả.

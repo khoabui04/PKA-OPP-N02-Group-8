@@ -1,6 +1,7 @@
-package library.Practice6;
+package Practice6;
 
 import java.util.Date;
+
 import library.BorrowingSlip;
 
 /**
