@@ -1,4 +1,4 @@
-package Practice6;
+package library.Practice6;
 
 import java.util.List;
 import library.BorrowingSlip;

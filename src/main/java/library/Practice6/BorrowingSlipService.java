@@ -1,10 +1,12 @@
-package Practice6;
+package library.Practice6;
 
 import java.util.ArrayList;
 import java.util.List;
 import library.BorrowingSlip;
 
-
+/**
+ * Lớp cung cấp dịch vụ xử lý phiếu mượn.
+ */
 public class BorrowingSlipService {
     /**
      * Lấy danh sách phiếu mượn theo mã bạn đọc.
@@ -22,3 +24,4 @@ public class BorrowingSlipService {
         return result;
     }
 }
+
