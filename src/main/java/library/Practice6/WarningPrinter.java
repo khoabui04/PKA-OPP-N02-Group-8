@@ -1,8 +1,17 @@
-package src;
+package library.Practice6;
 
 import java.util.List;
+import library.BorrowingSlip;
 
+/**
+ * Lớp in cảnh báo sách gần đến hạn trả cho bạn đọc.
+ */
 public class WarningPrinter {
+    /**
+     * In ra danh sách sách gần đến hạn trả cho bạn đọc.
+     * @param slips Danh sách phiếu mượn
+     * @param borrowerID Mã bạn đọc
+     */
     public static void printNearDueBooks(List<BorrowingSlip> slips, String borrowerID) {
         List<BorrowingSlip> userSlips = BorrowingSlipService.getSlipsByBorrowerID(slips, borrowerID);
         boolean found = false;

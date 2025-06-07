@@ -1,8 +1,13 @@
-package test;
+package library.Practice6;
 
-import src.*;
 import java.util.*;
+import library.BorrowingSlip;
+import library.Borrower;
+import library.Book;
 
+/**
+ * Lớp kiểm thử chức năng cảnh báo sách gần đến hạn trả.
+ */
 public class TestWarningPrinter {
     public static void main(String[] args) {
         // Tạo dữ liệu mẫu
