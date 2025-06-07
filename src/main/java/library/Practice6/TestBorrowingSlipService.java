@@ -9,7 +9,6 @@ public class TestBorrowingSlipService {
     public static void main(String[] args) {
         List<BorrowingSlip> slips = new ArrayList<>();
 
-        // Dữ liệu mẫu
         Borrower b1 = new Borrower("BD001", "Nguyen Van A", "0123456789");
         Borrower b2 = new Borrower("BD002", "Tran Thi B", "0987654321");
         Book book1 = new Book("B001", "Lập trình Java", "Nguyen Van Anh");
@@ -29,7 +28,6 @@ public class TestBorrowingSlipService {
             System.out.println("- " + slip.getBook().getBookName() + " | Hạn trả: " + slip.getDueDate());
         }
 
-        // Test WarningPrinter
         System.out.println("\nCảnh báo sách gần đến hạn trả:");
         WarningPrinter.printNearDueBooks(slips, borrowerID);
     }
