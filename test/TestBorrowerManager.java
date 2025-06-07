@@ -59,6 +59,7 @@ public class TestBorrowerManager {
         if (!found) {
             System.out.println("❌ Không tìm thấy người mượn này.");
         }
+        scanner.close();
     }
 
     public static void main(String[] args) {

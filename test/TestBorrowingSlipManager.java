@@ -117,6 +117,7 @@ public class TestBorrowingSlipManager {
         for (BorrowingSlip s : crud.getAll()) {
             System.out.println(s);
         }
+        scanner.close();
     }
 
     public static void main(String[] args) {
