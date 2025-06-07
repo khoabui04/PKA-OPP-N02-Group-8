@@ -75,3 +75,31 @@ Cách chạy kiểm thử
 
 java -cp out library.TestBookjava -cp out library.TestBorrowerjava -cp out library.TestBorrowingSlip
 
+11. Lưu đồ thuật toán :
+
+Bắt đầu
+   |
+Nhập mã bạn đọc
+   |
+Lấy danh sách phiếu mượn của bạn đọc
+   |
+Kiểm tra từng phiếu mượn:
+   |-- Nếu ngày trả còn ≤ 3 ngày --> Thêm vào danh sách cảnh báo
+   |-- Ngược lại --> Bỏ qua
+   |
+In danh sách cảnh báo
+   |
+Kết thúc
+
+## Chức năng chính: Thông báo sách gần đến hạn trả cho bạn đọc
+
+### Lưu đồ thuật toán
+
+![Lưu đồ cảnh báo sách gần đến hạn trả](path/to/your/flowchart.png)
+
+### Phân chia công việc
+
+- **Nguyễn Thị Minh Hằng:** Viết hàm lấy danh sách sách đã mượn bởi bạn đọc.
+- **Bùi Văn Khoa:** Viết hàm kiểm tra sách nào gần đến hạn trả.
+- **Đỗ Vân Khánh:** Viết hàm tổng hợp, in ra danh sách cảnh báo cho bạn đọc.
+
