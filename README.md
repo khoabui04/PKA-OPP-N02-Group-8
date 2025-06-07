@@ -1,22 +1,22 @@
 # PKA-OPP-N02-Group-8 - Quản lý thư viện
 
-#1. Thành viên
+1. Thành viên
 
 Nguyễn Thị Minh Hằng
 Bùi Văn Khoa
 Đỗ Vân Khánh
 
-#2. Tiêu đề
+2. Tiêu đề
 
 Quản lý thư viện
 
-#3. Đối tượng quản lý
+3. Đối tượng quản lý
 
 Book (Sách)
 Borrower (Người mượn)
 BorrowingSlip (Phiếu mượn)
 
-#4. Mô tả các lớp chính
+4. Mô tả các lớp chính
 
 Book
 
@@ -91,15 +91,41 @@ In danh sách cảnh báo
    |
 Kết thúc
 
-## Chức năng chính: Thông báo sách gần đến hạn trả cho bạn đọc
+12. Chức năng cảnh báo sách gần đến hạn trả
 
-### Lưu đồ thuật toán
+13. Phân chia công việc
 
-![Lưu đồ cảnh báo sách gần đến hạn trả](path/to/your/flowchart.png)
+- **Nguyễn Thị Minh Hằng:** Viết hàm lấy danh sách phiếu mượn (`BorrowingSlipService.java`)
+- **Bùi Văn Khoa:** Viết hàm kiểm tra gần đến hạn trả (`DueDateChecker.java`)
+- **Đỗ Vân Khánh:** Viết hàm tổng hợp và in cảnh báo (`WarningPrinter.java`)
 
-### Phân chia công việc
+14. Mô tả và code từng phương thức
 
-- **Nguyễn Thị Minh Hằng:** Viết hàm lấy danh sách sách đã mượn bởi bạn đọc.
-- **Bùi Văn Khoa:** Viết hàm kiểm tra sách nào gần đến hạn trả.
-- **Đỗ Vân Khánh:** Viết hàm tổng hợp, in ra danh sách cảnh báo cho bạn đọc.
+   14.1. BorrowingSlipService.java
+Trả về danh sách phiếu mượn theo mã bạn đọc.
+```java
+public static List<BorrowingSlip> getSlipsByBorrowerID(List<BorrowingSlip> slips, String borrowerID) { ... }
+```
+
+   14.2. DueDateChecker.java
+Kiểm tra phiếu mượn còn ≤ 3 ngày đến hạn trả.
+```java
+public static boolean isNearDueDate(BorrowingSlip slip) { ... }
+```
+
+   14.3. WarningPrinter.java
+In ra danh sách sách gần đến hạn trả.
+```java
+public static void printNearDueBooks(List<BorrowingSlip> slips, String borrowerID) { ... }
+```
+
+   14.4 Ảnh chạy chương trình
+
+- Viết hàm lấy danh sách phiếu mượn:
+
+- Viết hàm kiểm tra gần đến hạn trả:
+
+- Viết hàm tổng hợp và in cảnh báo: 
+
+
 
