@@ -17,7 +17,7 @@ public class BookManager {
             System.out.print("Chọn chức năng: ");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
-                case 1 -> {
+                case 1:
                     System.out.print("Nhập mã sách: ");
                     String id = scanner.nextLine();
                     System.out.print("Nhập tên sách: ");
@@ -25,24 +25,27 @@ public class BookManager {
                     System.out.print("Nhập tác giả: ");
                     String author = scanner.nextLine();
                     crud.add(new Book(id, name, author));
-                }
-                case 2 -> {
+                    break;
+                case 2:
                     int i = 0;
                     for (Book b : crud.getAll()) {
                         System.out.println((i++) + ": " + b);
                     }
-                }
-                case 3 -> {
+                    break;
+                case 3:
                     System.out.print("Nhập vị trí sách cần xoá: ");
                     int idx = Integer.parseInt(scanner.nextLine());
                     crud.remove(idx);
-                }
-                case 4 -> crud.save();
-                case 0 -> {
+                    break;
+                case 4:
+                    crud.save();
+                    break;
+                case 0:
                     crud.save();
                     return;
-                }
-                default -> System.out.println("Lựa chọn không hợp lệ.");
+                default:
+                    System.out.println("Lựa chọn không hợp lệ.");
+                    break;
             }
         }
     }
