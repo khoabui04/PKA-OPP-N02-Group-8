@@ -8,24 +8,93 @@ public class Book implements Serializable {
     private String author;
 
     public Book(String bookID, String bookName, String author) {
-        this.bookID = bookID;
-        this.bookName = bookName;
-        this.author = author;
+        try {
+            this.bookID = bookID;
+            this.bookName = bookName;
+            this.author = author;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Khối finally của constructor Book
+        }
     }
 
-    public String getBookID() { return bookID; }
-    public void setBookID(String bookID) { this.bookID = bookID; }
-    public String getBookName() { return bookName; }
-    public void setBookName(String bookName) { this.bookName = bookName; }
-    public String getAuthor() { return author; }
-    public void setAuthor(String author) { this.author = author; }
+    public String getBookID() {
+        try {
+            return bookID;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            // Khối finally của getBookID
+        }
+    }
+
+    public void setBookID(String bookID) {
+        try {
+            this.bookID = bookID;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Khối finally của setBookID
+        }
+    }
+
+    public String getBookName() {
+        try {
+            return bookName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            // Khối finally của getBookName
+        }
+    }
+
+    public void setBookName(String bookName) {
+        try {
+            this.bookName = bookName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Khối finally của setBookName
+        }
+    }
+
+    public String getAuthor() {
+        try {
+            return author;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            // Khối finally của getAuthor
+        }
+    }
+
+    public void setAuthor(String author) {
+        try {
+            this.author = author;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Khối finally của setAuthor
+        }
+    }
 
     @Override
     public String toString() {
-        return "Book{" +
-                "bookID='" + bookID + '\'' +
-                ", bookName='" + bookName + '\'' +
-                ", author='" + author + '\'' +
-                '}';
+        try {
+            return "Book{" +
+                    "bookID='" + bookID + '\'' +
+                    ", bookName='" + bookName + '\'' +
+                    ", author='" + author + '\'' +
+                    '}';
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        } finally {
+            // Khối finally của toString
+        }
     }
 }
