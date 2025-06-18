@@ -19,7 +19,7 @@ public class BorrowingSlipManager {
             System.out.print("Chọn chức năng: ");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
-                case 1 -> {
+                case 1:
                     System.out.print("Nhập mã phiếu mượn: ");
                     String slipID = scanner.nextLine();
 
@@ -47,24 +47,27 @@ public class BorrowingSlipManager {
 
                     BorrowingSlip slip = new BorrowingSlip(slipID, borrower, book, borrowDate, dueDate);
                     crud.add(slip);
-                }
-                case 2 -> {
+                    break;
+                case 2:
                     int i = 0;
                     for (BorrowingSlip s : crud.getAll()) {
                         System.out.println((i++) + ": " + s);
                     }
-                }
-                case 3 -> {
+                    break;
+                case 3:
                     System.out.print("Nhập vị trí phiếu mượn cần xoá: ");
                     int idx = Integer.parseInt(scanner.nextLine());
                     crud.remove(idx);
-                }
-                case 4 -> crud.save();
-                case 0 -> {
+                    break;
+                case 4:
+                    crud.save();
+                    break;
+                case 0:
                     crud.save();
                     return;
-                }
-                default -> System.out.println("Lựa chọn không hợp lệ.");
+                default:
+                    System.out.println("Lựa chọn không hợp lệ.");
+                    break;
             }
         }
     }

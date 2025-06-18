@@ -60,6 +60,7 @@ public class TestBookManager {
         if (!found) {
             System.out.println("❌ Không tìm thấy sách của tác giả này.");
         }
+        scanner.close();
     }
 
     public static void main(String[] args) {
