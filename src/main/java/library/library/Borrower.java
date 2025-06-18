@@ -17,15 +17,31 @@ public class Borrower implements Serializable {
             this.phoneNumber = phoneNumber;
         } catch (Exception e) {
             System.out.println("Lỗi khi tạo đối tượng Borrower: " + e.getMessage());
+        } finally {
+            // Khối finally của constructor Borrower
         }
     }
 
     public String getBorrowerID() {
-        return borrowerID;
+        try {
+            return borrowerID;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            // Khối finally của getBorrowerID
+        }
     }
 
     public String getBorrowerName() {
-        return borrowerName;
+        try {
+            return borrowerName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            // Khối finally của getBorrowerName
+        }
     }
 
     public void setBorrowerName(String borrowerName) {
@@ -36,11 +52,20 @@ public class Borrower implements Serializable {
             this.borrowerName = borrowerName;
         } catch (Exception e) {
             System.out.println("Lỗi khi đặt tên người mượn: " + e.getMessage());
+        } finally {
+            // Khối finally của setBorrowerName
         }
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        try {
+            return phoneNumber;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            // Khối finally của getPhoneNumber
+        }
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -51,6 +76,8 @@ public class Borrower implements Serializable {
             this.phoneNumber = phoneNumber;
         } catch (Exception e) {
             System.out.println("Lỗi khi đặt số điện thoại: " + e.getMessage());
+        } finally {
+            // Khối finally của setPhoneNumber
         }
     }
 
@@ -62,6 +89,8 @@ public class Borrower implements Serializable {
             borrowedBooks.add(book);
         } catch (Exception e) {
             System.out.println("Lỗi khi mượn sách: " + e.getMessage());
+        } finally {
+            // Khối finally của borrowBook
         }
     }
 
@@ -71,6 +100,8 @@ public class Borrower implements Serializable {
         } catch (Exception e) {
             System.out.println("Lỗi khi lấy danh sách sách mượn: " + e.getMessage());
             return new ArrayList<>();
+        } finally {
+            // Khối finally của getBorrowedBooks
         }
     }
 
