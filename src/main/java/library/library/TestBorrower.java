@@ -13,19 +13,13 @@ public class TestBorrower {
             System.out.println("Borrower ID: " + borrower.getBorrowerID());
             System.out.println("Borrower: " + borrower);
             System.out.println("Books Borrowed:");
-
             for (Book b : borrower.getBorrowedBooks()) {
-                try {
-                    System.out.println("- " + b.getBookName() + " by " + b.getAuthor());
-                } catch (Exception e) {
-                    System.out.println("Lỗi khi hiển thị sách: " + e.getMessage());
-                }
+                System.out.println("- " + b.getBookName() + " by " + b.getAuthor());
             }
-
         } catch (Exception e) {
-            System.out.println("Lỗi trong quá trình kiểm thử Borrower: " + e.getMessage());
+            e.printStackTrace();
         } finally {
-            System.out.println("✅ Kết thúc kiểm thử Borrower.");
+            System.out.println("Kết thúc kiểm thử Borrower.");
         }
     }
 } 
