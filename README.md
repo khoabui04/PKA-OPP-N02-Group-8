@@ -121,11 +121,9 @@ public static void printNearDueBooks(List<BorrowingSlip> slips, String borrowerI
 
    14.4 Ảnh chạy chương trình
 
-- Viết hàm lấy danh sách phiếu mượn:
+Viết hàm lấy danh sách phiếu mượn+ Viết hàm kiểm tra gần đến hạn trả+Viết hàm tổng hợp và in cảnh báo: 
 
-- Viết hàm kiểm tra gần đến hạn trả:
-
-- Viết hàm tổng hợp và in cảnh báo: 
+https://drive.google.com/drive/folders/1br1l1kf0BAGJCVGVEAaElXbE0fobXPOs?usp=sharing
 
 
 
