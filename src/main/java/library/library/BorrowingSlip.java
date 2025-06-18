@@ -24,6 +24,29 @@ public class BorrowingSlip implements Serializable {
     public Date getBorrowDate() { return borrowDate; }
     public Date getDueDate() { return dueDate; }
 
+    // Phương thức thêm mới có khối try-catch-finally
+    public void processBorrowing() {
+        try {
+            System.out.println("Processing borrowing slip...");
+
+            if (book == null) {
+                throw new Exception("Book is null");
+            }
+
+            if (borrower == null) {
+                throw new Exception("Borrower is null");
+            }
+
+            // Nếu mọi thứ hợp lệ, in ra thông tin phiếu mượn
+            System.out.println(this);
+
+        } catch (Exception e) {
+            System.err.println("Error while processing borrowing slip: " + e.getMessage());
+        } finally {
+            System.out.println("Finished processing borrowing slip: " + slipID);
+        }
+    }
+
     @Override
     public String toString() {
         return "BorrowingSlip{" +
