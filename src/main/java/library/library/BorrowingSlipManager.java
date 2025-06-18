@@ -46,30 +46,35 @@ public class BorrowingSlipManager {
                         cal.add(Calendar.DAY_OF_MONTH, 7);
                         Date dueDate = cal.getTime();
 
-                    BorrowingSlip slip = new BorrowingSlip(slipID, borrower, book, borrowDate, dueDate);
-                    crud.add(slip);
-                    break;
-                case 2:
-                    int i = 0;
-                    for (BorrowingSlip s : crud.getAll()) {
-                        System.out.println((i++) + ": " + s);
-                    }
-                    break;
-                case 3:
-                    System.out.print("Nhập vị trí phiếu mượn cần xoá: ");
-                    int idx = Integer.parseInt(scanner.nextLine());
-                    crud.remove(idx);
-                    break;
-                case 4:
-                    crud.save();
-                    break;
-                case 0:
-                    crud.save();
-                    return;
-                default:
-                    System.out.println("Lựa chọn không hợp lệ.");
-                    break;
+                        BorrowingSlip slip = new BorrowingSlip(slipID, borrower, book, borrowDate, dueDate);
+                        crud.add(slip);
+                        break;
+                    case 2:
+                        int i = 0;
+                        for (BorrowingSlip s : crud.getAll()) {
+                            System.out.println((i++) + ": " + s);
+                        }
+                        break;
+                    case 3:
+                        System.out.print("Nhập vị trí phiếu mượn cần xoá: ");
+                        int idx = Integer.parseInt(scanner.nextLine());
+                        crud.remove(idx);
+                        break;
+                    case 4:
+                        crud.save();
+                        break;
+                    case 0:
+                        crud.save();
+                        return;
+                    default:
+                        System.out.println("Lựa chọn không hợp lệ.");
+                        break;
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Đã xảy ra lỗi: " + e.getMessage());
+        } finally {
+            scanner.close();
         }
     }
 }
