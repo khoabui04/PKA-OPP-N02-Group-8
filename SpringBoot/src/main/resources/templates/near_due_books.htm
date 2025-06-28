@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sách Sắp Đến Hạn Trả</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Sách Sắp Đến Hạn Trả cho Người Mượn: {{borrowerId}}</h1>
+    <table>
+        <tr>
+            <th>Mã Sách</th>
+            <th>Tiêu Đề</th>
+            <th>Tác Giả</th>
+            <th>Ngày Đến Hạn</th>
+        </tr>
+        {{#books}}
+        <tr>
+            <td>{{bookId}}</td>
+            <td>{{title}}</td>
+            <td>{{author}}</td>
+            <td>{{dueDate}}</td>
+        </tr>
+        {{/books}}
+    </table>
+    {{#error}}
+    <p style="color:red;">{{error}}</p>
+    {{/error}}
+</body>
+</html>

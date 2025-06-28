@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Danh Sách Bản Ghi Mượn</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Danh Sách Bản Ghi Mượn</h1>
+    <table>
+        <tr>
+            <th>Mã Bản Ghi</th>
+            <th>Mã Sách</th>
+            <th>Mã Người Mượn</th>
+            <th>Ngày Mượn</th>
+            <th>Ngày Đến Hạn</th>
+        </tr>
+        {{#records}}
+        <tr>
+            <td>{{recordId}}</td>
+            <td>{{bookId}}</td>
+            <td>{{borrowerId}}</td>
+            <td>{{borrowDate}}</td>
+            <td>{{dueDate}}</td>
+        </tr>
+        {{/records}}
+    </table>
+    {{#error}}
+    <p style="color:red;">{{error}}</p>
+    {{/error}}
+</body>
+</html>

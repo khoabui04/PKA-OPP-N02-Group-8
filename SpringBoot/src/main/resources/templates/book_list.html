@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Danh Sách Sách</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Danh Sách Sách</h1>
+    <table>
+        <tr>
+            <th>Mã Sách</th>
+            <th>Tiêu Đề</th>
+            <th>Tác Giả</th>
+            <th>Trạng Thái</th>
+        </tr>
+        {{#books}}
+        <tr>
+            <td>{{bookId}}</td>
+            <td>{{title}}</td>
+            <td>{{author}}</td>
+            <td>{{#isAvailable}}Có Sẵn{{/isAvailable}}{{^isAvailable}}Đã Mượn{{/isAvailable}}</td>
+        </tr>
+        {{/books}}
+    </table>
+    {{#error}}
+    <p style="color:red;">{{error}}</p>
+    {{/error}}
+</body>
+</html>
