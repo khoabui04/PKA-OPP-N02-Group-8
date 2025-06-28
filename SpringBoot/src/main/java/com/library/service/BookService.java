@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@ervice
+@Service
 public class BookService {
     private final BookRepository bookRepository = new BookRepository();
 
@@ -15,8 +15,6 @@ public class BookService {
             bookRepository.create(book);
         } catch (Exception e) {
             System.err.println("Lỗi khi thêm sách: " + e.getMessage());
-        } finally {
-            System.out.println("Hoàn thành thao tác thêm sách.");
         }
     }
 
@@ -26,8 +24,6 @@ public class BookService {
         } catch (Exception e) {
             System.err.println("Lỗi khi tìm sách: " + e.getMessage());
             return null;
-        } finally {
-            System.out.println("Hoàn thành thao tác tìm sách.");
         }
     }
 
@@ -36,27 +32,23 @@ public class BookService {
             bookRepository.updateBook(updatedBook);
         } catch (Exception e) {
             System.err.println("Lỗi khi cập nhật sách: " + e.getMessage());
-        } finally {
-            System.out.println("Hoàn thành thao tác cập nhật sách.");
         }
     }
 
-    public void deleteBook(String bookId) {
+    public void deleteBook(String bookId) {id deleteBook(String bookId) {
         try {
-            bookRepository.deleteBook(bookId);
+            bookRepository.deleteBook(bookId);teBook(bookId);
         } catch (Exception e) {
-            System.err.println("Lỗi khi xóa sách: " + e.getMessage());
-        } finally {
-            System.out.println("Hoàn thành thao tác xóa sách.");
-        }
-    }
+            System.err.println("Lỗi khi xóa sách: " + e.getMessage());   System.err.println("Lỗi khi xóa sách: " + e.getMessage());
+        }   }
+    }    }
 
-    public List<Book> getAllBooks() {
+    public List<Book> getAllBooks() {st<Book> getAllBooks() {
         try {
-            return bookRepository.readAll();
+            return bookRepository.readAll();ry.readAll();
         } catch (Exception e) {
-            System.err.println("Lỗi khi lấy danh sách sách: " + e.getMessage());
-            return null;
-        }
-    }
+            System.err.println("Lỗi khi lấy danh sách sách: " + e.getMessage());rintln("Lỗi khi lấy danh sách sách: " + e.getMessage());
+            return null;   return null;
+        }   }
+    }   }}
 }

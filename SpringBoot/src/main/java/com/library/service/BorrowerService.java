@@ -48,7 +48,7 @@ public class BorrowerService {
             return borrowerRepository.readAll();
         } catch (Exception e) {
             System.err.println("Lỗi khi lấy danh sách người mượn: " + e.getMessage());
-            return null;null;
+            return null;
         }
     }
 }

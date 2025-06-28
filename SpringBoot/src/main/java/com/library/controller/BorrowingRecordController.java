@@ -2,12 +2,11 @@ package com.library.controller;
 
 import com.library.model.BorrowingRecord;
 import com.library.service.BorrowingRecordService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.List;
 
 @Controller
 public class BorrowingRecordController {
@@ -17,7 +16,7 @@ public class BorrowingRecordController {
     @GetMapping("/borrowing-records")
     public String listBorrowingRecords(Model model) {
         try {
-            List<BorrowingRecord> records = service.getRecordRepository().readAll();
+            List<BorrowingRecord> records = service.getAllRecords();
             model.addAttribute("records", records);
             return "borrowing_record";
         } catch (Exception e) {
