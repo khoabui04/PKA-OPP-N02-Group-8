@@ -1,11 +1,11 @@
 # Ignore Maven target directory
 SpringBoot/target/
 
-# Ignore application.properties
-SpringBoot/src/main/resources/application.properties
-
 # Ignore IDE files
 *.iml
 .idea/
 .vscode/
+
+# Ignore application.properties file
+SpringBoot/src/main/resources/application.properties
 
