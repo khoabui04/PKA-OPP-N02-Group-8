@@ -2,79 +2,34 @@ package com.library.service;
 
 import com.library.model.Book;
 import com.library.model.BorrowingRecord;
-import com.library.repository.BookRepository;
 import com.library.repository.BorrowingRecordRepository;
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class BorrowingRecordService {
-    private final BorrowingRecordRepository recordRepository;
-    private final BookRepository bookRepository;
+    private final BorrowingRecordRepository borrowingRecordRepository = new BorrowingRecordRepository();
 
-    public BorrowingRecordService() {
-        this.recordRepository = new BorrowingRecordRepository();
-        this.bookRepository = new BookRepository();
-    }
-
-    public void addBorrowingRecord(BorrowingRecord record) {
+    public List<BorrowingRecord> getAllRecords() {
         try {
-            Book book = bookRepository.findById(record.getBookId());
-            if (book != null && book.isAvailable()) {
-                book.setAvailable(false);
-                bookRepository.updateBook(book);
-                recordRepository.create(record);
-            } else {
-                throw new IllegalStateException("Sách không có sẵn để mượn.");
-            }
+            return borrowingRecordRepository.readAll();
         } catch (Exception e) {
-            System.err.println("Lỗi khi thêm bản ghi mượn: " + e.getMessage());
-        } finally {
-            System.out.println("Hoàn thành thao tác thêm bản ghi mượn.");
-        }
-    }
-
-    public List<Book> listBorrowedBooks(String borrowerId) {
-        try {
-            List<BorrowingRecord> records = recordRepository.readAll().stream()
-                    .filter(record -> record.getBorrowerId().equals(borrowerId))
-                    .collect(Collectors.toList());
-            return records.stream()
-                    .map(record -> bookRepository.findById(record.getBookId()))
-                    .filter(book -> book != null)
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            System.err.println("Lỗi khi liệt kê sách đã mượn: " + e.getMessage());
-            return List.of();
-        } finally {
-            System.out.println("Hoàn thành thao tác liệt kê sách đã mượn.");
+            System.err.println("Lỗi khi lấy danh sách bản ghi mượn: " + e.getMessage());
+            return null;
         }
     }
 
     public List<Book> listBooksNearDueDate(String borrowerId) {
-        try {
-            LocalDate today = LocalDate.now();
-            List<BorrowingRecord> records = recordRepository.readAll().stream()
-                    .filter(record -> record.getBorrowerId().equals(borrowerId))
-                    .filter(record -> record.getDueDate().isBefore(today.plusDays(4)))
-                    .collect(Collectors.toList());
-            return records.stream()
-                    .map(record -> bookRepository.findById(record.getBookId()))
-                    .filter(book -> book != null)
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            System.err.println("Lỗi khi liệt kê sách sắp đến hạn: " + e.getMessage());
-            return List.of();
-        } finally {
-            System.out.println("Hoàn thành thao tác liệt kê sách sắp đến hạn.");
-        }
-    }
-
-    public BorrowingRecordRepository getRecordRepository() {
-        return recordRepository;
-    }
-
-    public BookRepository getBookRepository() {
-        return bookRepository;
+        LocalDate now = LocalDate.now();
+        LocalDate nearDue = now.plusDays(3);
+        return borrowingRecordRepository.readAll().stream()
+                .filter(r -> r.getBorrower().getBorrowerId().equals(borrowerId))
+                .filter(r -> !r.isReturned())
+                .filter(r -> r.getDueDate().isAfter(now) && r.getDueDate().isBefore(nearDue))
+                .map(BorrowingRecord::getBook)
+                .collect(Collectors.toList());
     }
 }

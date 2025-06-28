@@ -2,15 +2,13 @@ package com.library.service;
 
 import com.library.model.Book;
 import com.library.repository.BookRepository;
-import java.util.ArrayList;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@ervice
 public class BookService {
-    private final BookRepository bookRepository;
-
-    public BookService() {
-        this.bookRepository = new BookRepository();
-    }
+    private final BookRepository bookRepository = new BookRepository();
 
     public void addBook(Book book) {
         try {
@@ -58,9 +56,7 @@ public class BookService {
             return bookRepository.readAll();
         } catch (Exception e) {
             System.err.println("Lỗi khi lấy danh sách sách: " + e.getMessage());
-            return new ArrayList<>();
-        } finally {
-            System.out.println("Hoàn thành thao tác lấy danh sách sách.");
+            return null;
         }
     }
 }

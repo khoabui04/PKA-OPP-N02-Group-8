@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Danh Sách Người Mượn</title>
     <link rel="stylesheet" href="/css/style.css">
@@ -12,16 +12,12 @@
             <th>Tên</th>
             <th>Email</th>
         </tr>
-        {{#borrowers}}
-        <tr>
-            <td>{{borrowerId}}</td>
-            <td>{{name}}</td>
-            <td>{{email}}</td>
+        <tr th:each="borrower : ${borrowers}">
+            <td th:text="${borrower.borrowerId}"></td>
+            <td th:text="${borrower.name}"></td>
+            <td th:text="${borrower.email}"></td>
         </tr>
-        {{/borrowers}}
     </table>
-    {{#error}}
-    <p style="color:red;">{{error}}</p>
-    {{/error}}
+    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
 </body>
 </html>

@@ -9,6 +9,7 @@ public class BorrowingRecord implements Serializable {
     private String borrowerId;
     private LocalDate borrowDate;
     private LocalDate dueDate;
+    private boolean returned = false;
 
     public BorrowingRecord(String recordId, String bookId, String borrowerId, LocalDate borrowDate, LocalDate dueDate) {
         this.recordId = recordId;
@@ -28,6 +29,14 @@ public class BorrowingRecord implements Serializable {
     public void setBorrowDate(LocalDate borrowDate) { this.borrowDate = borrowDate; }
     public LocalDate getDueDate() { return dueDate; }
     public void setDueDate(LocalDate dueDate) { this.dueDate = dueDate; }
+
+    public boolean isReturned() {
+        return returned;
+    }
+
+    public void setReturned(boolean returned) {
+        this.returned = returned;
+    }
 
     @Override
     public String toString() {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Danh Sách Sách</title>
     <link rel="stylesheet" href="/css/style.css">
@@ -13,17 +13,13 @@
             <th>Tác Giả</th>
             <th>Trạng Thái</th>
         </tr>
-        {{#books}}
-        <tr>
-            <td>{{bookId}}</td>
-            <td>{{title}}</td>
-            <td>{{author}}</td>
-            <td>{{#isAvailable}}Có Sẵn{{/isAvailable}}{{^isAvailable}}Đã Mượn{{/isAvailable}}</td>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.bookId}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.available ? 'Có Sẵn' : 'Đã Mượn'}"></td>
         </tr>
-        {{/books}}
     </table>
-    {{#error}}
-    <p style="color:red;">{{error}}</p>
-    {{/error}}
+    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
 </body>
 </html>
