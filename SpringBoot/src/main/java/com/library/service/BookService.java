@@ -2,9 +2,8 @@ package com.library.service;
 
 import com.library.model.Book;
 import com.library.repository.BookRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 
 @Service
 public class BookService {
@@ -35,20 +34,20 @@ public class BookService {
         }
     }
 
-    public void deleteBook(String bookId) {id deleteBook(String bookId) {
+    public void deleteBook(String bookId) {
         try {
-            bookRepository.deleteBook(bookId);teBook(bookId);
+            bookRepository.deleteBook(bookId);
         } catch (Exception e) {
-            System.err.println("Lỗi khi xóa sách: " + e.getMessage());   System.err.println("Lỗi khi xóa sách: " + e.getMessage());
-        }   }
-    }    }
+            System.err.println("Lỗi khi xóa sách: " + e.getMessage());
+        }
+    }
 
-    public List<Book> getAllBooks() {st<Book> getAllBooks() {
+    public List<Book> getAllBooks() {
         try {
-            return bookRepository.readAll();ry.readAll();
+            return bookRepository.readAll();
         } catch (Exception e) {
-            System.err.println("Lỗi khi lấy danh sách sách: " + e.getMessage());rintln("Lỗi khi lấy danh sách sách: " + e.getMessage());
-            return null;   return null;
-        }   }
-    }   }}
+            System.err.println("Lỗi khi lấy danh sách sách: " + e.getMessage());
+            return null;
+        }
+    }
 }

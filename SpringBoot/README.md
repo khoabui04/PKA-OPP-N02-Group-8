@@ -8,6 +8,14 @@
 - Liệt kê sách đã mượn, sách sắp đến hạn trả
 - Giao diện web đơn giản
 
+## Chức năng mở rộng
+- Kết nối MySQL Cloud (Aiven)
+- Spring Data JPA
+- Đăng nhập, phân quyền (Spring Security)
+- Tìm kiếm, phân trang
+- API REST
+- Giao diện Bootstrap
+
 ## Cài đặt & chạy
 ```sh
 cd SpringBoot
@@ -21,10 +29,17 @@ Truy cập [http://localhost:8080](http://localhost:8080)
 mvn test
 ```
 
+## Hướng dẫn sử dụng
+- Xem chi tiết từng phần trong các file:
+    - application.properties: cấu hình MySQL
+    - BookRepository.java: JPA, tìm kiếm, phân trang
+    - SecurityConfig.java: bảo mật
+    - BookRestController.java: API REST
+    - book_list.html: giao diện, tìm kiếm, phân trang, Bootstrap
+
 ## Thành viên nhóm
 - Sinh viên A: Sách, giao diện
 - Sinh viên B: Người mượn, kiểm thử
 - Sinh viên C: Bản ghi mượn, tài liệu
 
-## Sơ đồ UML
-Xem trong thư mục `docs/`
+## Demo, báo cáo, UML, phân chia công việc: [đường dẫn Google Drive/Youtube/Github]

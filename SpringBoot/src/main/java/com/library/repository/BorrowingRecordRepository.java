@@ -1,24 +1,8 @@
 package com.library.repository;
 
 import com.library.model.BorrowingRecord;
-import com.library.util.FileHandler;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public class BorrowingRecordRepository extends GenericRepository<BorrowingRecord> {
-    public BorrowingRecordRepository() {
-        super("records.dat");
-    }
-
-    public BorrowingRecord findById(String recordId) {
-        return read(record -> record.getRecordId().equals(recordId));
-    }
-
-    public void updateBorrowingRecord(BorrowingRecord record) {
-        update(record, r -> r.getRecordId().equals(record.getRecordId()));
-    }
-
-    public void deleteBorrowingRecord(String recordId) {
-        delete(record -> record.getRecordId().equals(recordId));
-    }
+public interface BorrowingRecordRepository extends JpaRepository<BorrowingRecord, String> {
+    // Có thể thêm các phương thức custom nếu cần
 }
