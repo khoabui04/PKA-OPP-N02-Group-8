@@ -1,8 +1,12 @@
 package com.library.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "books")
 public class Book implements Serializable {
     @Id
     private String bookId;
@@ -10,6 +14,7 @@ public class Book implements Serializable {
     private String author;
     private boolean available;
 
+    public Book() {}
     public Book(String bookId, String title, String author, boolean available) {
         this.bookId = bookId;
         this.title = title;
@@ -25,9 +30,4 @@ public class Book implements Serializable {
     public void setAuthor(String author) { this.author = author; }
     public boolean isAvailable() { return available; }
     public void setAvailable(boolean available) { this.available = available; }
-
-    @Override
-    public String toString() {
-        return "Book{ID=" + bookId + ", Title=" + title + ", Author=" + author + ", Available=" + available + "}";
-    }
 }

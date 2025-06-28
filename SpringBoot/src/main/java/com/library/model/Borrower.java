@@ -1,12 +1,19 @@
 package com.library.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "borrowers")
 public class Borrower implements Serializable {
+    @Id
     private String borrowerId;
     private String name;
     private String email;
 
+    public Borrower() {}
     public Borrower(String borrowerId, String name, String email) {
         this.borrowerId = borrowerId;
         this.name = name;
