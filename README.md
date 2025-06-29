@@ -30,7 +30,6 @@ Mã phiếu, người mượn, sách, ngày mượn, hạn trả
 
 5. Cấu trúc thư mục Project
 
-
 PKA-OPP-N02-Group-8/├── src/│   └── main/│       └── java/│           └── library/│               ├── Book.java│               ├── BookManager.java│               ├── Borrower.java│               ├── BorrowerManager.java│               ├── BorrowingSlip.java│               ├── BorrowingSlipManager.java│               ├── CrudManager.java│               ├── QuanLi.java│               ├── TestBook.java│               ├── TestBorrower.java│               └── TestBorrowingSlip.java├── README.md└── ...
 
 6. Chức năng chính

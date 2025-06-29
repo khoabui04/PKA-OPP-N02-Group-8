@@ -293,4 +293,10 @@ Nếu gặp vấn đề, vui lòng:
 ---
 
 **Phiên bản**: 1.0.0  
-**Cập nhật lần cuối**: Tháng 1, 2024 
+**Cập nhật lần cuối**: Tháng 1, 2024
+
+## Đường dẫn quan trọng
+
+- [Kho mã nguồn Github](https://github.com/your-org/your-repo)
+- [Video demo Youtube](https://youtube.com/your-demo-link)
+- [Link ứng dụng chạy thử (nếu có)](https://your-app-link)
