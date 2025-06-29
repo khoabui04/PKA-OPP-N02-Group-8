@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head}">
+    <title>Thêm giao dịch mượn sách - Hệ thống quản lý thư viện</title>
+</head>
+<body>
+    <div th:replace="~{layout/base :: body}">
+        <div th:fragment="content">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="bi bi-arrow-down-circle me-2"></i>Thêm giao dịch mượn sách</h2>
+                <a href="/borrowings" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left me-2"></i>Quay lại
+                </a>
+            </div>
+
+            <!-- Error Messages -->
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <span th:text="${error}">Có lỗi xảy ra!</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Thông tin mượn sách</h5>
+                        </div>
+                        <div class="card-body">
+                            <form th:action="@{/borrowings}" method="post">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="bookId" class="form-label">Sách <span class="text-danger">*</span></label>
+                                            <select class="form-select" id="bookId" name="bookId" required>
+                                                <option value="">Chọn sách</option>
+                                                <option th:each="book : ${availableBooks}" 
+                                                        th:value="${book.id}" 
+                                                        th:text="${book.title + ' - ' + book.author + ' (Có sẵn: ' + book.availableQuantity + ')'}"
+                                                        th:selected="${param.bookId != null && param.bookId[0] == book.id.toString()}">
+                                                    Tên sách - Tác giả
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="readerId" class="form-label">Độc giả <span class="text-danger">*</span></label>
+                                            <select class="form-select" id="readerId" name="readerId" required>
+                                                <option value="">Chọn độc giả</option>
+                                                <option th:each="reader : ${activeReaders}" 
+                                                        th:value="${reader.id}" 
+                                                        th:text="${reader.name + ' (' + reader.email + ')'}"
+                                                        th:selected="${param.readerId != null && param.readerId[0] == reader.id.toString()}">
+                                                    Tên độc giả (Email)
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="borrowDate" class="form-label">Ngày mượn</label>
+                                            <input type="date" class="form-control" id="borrowDate" name="borrowDate" 
+                                                   th:value="${#temporals.format(#temporals.createToday(), 'yyyy-MM-dd')}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="dueDate" class="form-label">Hạn trả</label>
+                                            <input type="date" class="form-control" id="dueDate" name="dueDate" 
+                                                   th:value="${#temporals.format(#temporals.createToday().plusDays(14), 'yyyy-MM-dd')}" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="bookConditionBorrowed" class="form-label">Tình trạng sách khi mượn</label>
+                                            <select class="form-select" id="bookConditionBorrowed" name="bookConditionBorrowed">
+                                                <option value="Tốt" selected>Tốt</option>
+                                                <option value="Khá">Khá</option>
+                                                <option value="Trung bình">Trung bình</option>
+                                                <option value="Kém">Kém</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="maxRenewals" class="form-label">Số lần gia hạn tối đa</label>
+                                            <input type="number" class="form-control" id="maxRenewals" name="maxRenewals" 
+                                                   value="2" min="0" max="5">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="notes" class="form-label">Ghi chú</label>
+                                    <textarea class="form-control" id="notes" name="notes" rows="3" 
+                                              placeholder="Ghi chú về giao dịch mượn sách"></textarea>
+                                </div>
+
+                                <div class="d-flex justify-content-end gap-2">
+                                    <a href="/borrowings" class="btn btn-secondary">Hủy</a>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="bi bi-check-circle me-2"></i>Tạo giao dịch mượn
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <!-- Quick Search -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h6 class="mb-0">Tìm kiếm nhanh</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="bookSearch" class="form-label">Tìm sách</label>
+                                <input type="text" class="form-control" id="bookSearch" placeholder="Nhập tên sách...">
+                            </div>
+                            <div class="mb-3">
+                                <label for="readerSearch" class="form-label">Tìm độc giả</label>
+                                <input type="text" class="form-control" id="readerSearch" placeholder="Nhập tên độc giả...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book Information -->
+                    <div class="card mb-3" id="bookInfo" style="display: none;">
+                        <div class="card-header">
+                            <h6 class="mb-0">Thông tin sách</h6>
+                        </div>
+                        <div class="card-body">
+                            <div id="bookDetails">
+                                <!-- Book details will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reader Information -->
+                    <div class="card mb-3" id="readerInfo" style="display: none;">
+                        <div class="card-header">
+                            <h6 class="mb-0">Thông tin độc giả</h6>
+                        </div>
+                        <div class="card-body">
+                            <div id="readerDetails">
+                                <!-- Reader details will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Borrowing Rules -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0">Quy định mượn sách</h6>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2">
+                                    <i class="bi bi-info-circle text-info me-2"></i>
+                                    <small>Thời hạn mượn mặc định: 14 ngày</small>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-info-circle text-info me-2"></i>
+                                    <small>Có thể gia hạn tối đa 2 lần</small>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-info-circle text-info me-2"></i>
+                                    <small>Phạt quá hạn: 5,000 VNĐ/ngày</small>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-info-circle text-info me-2"></i>
+                                    <small>Kiểm tra tình trạng sách khi mượn</small>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:replace="~{layout/base :: scripts}"></script>
+    <script>
+        // Book search functionality
+        document.getElementById('bookSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const bookSelect = document.getElementById('bookId');
+            const options = bookSelect.options;
+            
+            for (let i = 1; i < options.length; i++) {
+                const option = options[i];
+                const text = option.text.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    option.style.display = '';
+                } else {
+                    option.style.display = 'none';
+                }
+            }
+        });
+
+        // Reader search functionality
+        document.getElementById('readerSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const readerSelect = document.getElementById('readerId');
+            const options = readerSelect.options;
+            
+            for (let i = 1; i < options.length; i++) {
+                const option = options[i];
+                const text = option.text.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    option.style.display = '';
+                } else {
+                    option.style.display = 'none';
+                }
+            }
+        });
+
+        // Show book information when selected
+        document.getElementById('bookId').addEventListener('change', function(e) {
+            const bookId = e.target.value;
+            if (bookId) {
+                // In a real application, you would fetch book details via AJAX
+                // For now, we'll show a placeholder
+                document.getElementById('bookInfo').style.display = 'block';
+                document.getElementById('bookDetails').innerHTML = `
+                    <p><strong>Sách đã chọn:</strong></p>
+                    <p class="text-muted">Thông tin chi tiết sẽ được hiển thị ở đây</p>
+                `;
+            } else {
+                document.getElementById('bookInfo').style.display = 'none';
+            }
+        });
+
+        // Show reader information when selected
+        document.getElementById('readerId').addEventListener('change', function(e) {
+            const readerId = e.target.value;
+            if (readerId) {
+                // In a real application, you would fetch reader details via AJAX
+                // For now, we'll show a placeholder
+                document.getElementById('readerInfo').style.display = 'block';
+                document.getElementById('readerDetails').innerHTML = `
+                    <p><strong>Độc giả đã chọn:</strong></p>
+                    <p class="text-muted">Thông tin chi tiết sẽ được hiển thị ở đây</p>
+                `;
+            } else {
+                document.getElementById('readerInfo').style.display = 'none';
+            }
+        });
+
+        // Form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const bookId = document.getElementById('bookId').value;
+            const readerId = document.getElementById('readerId').value;
+            const borrowDate = document.getElementById('borrowDate').value;
+            const dueDate = document.getElementById('dueDate').value;
+            
+            if (!bookId) {
+                e.preventDefault();
+                alert('Vui lòng chọn sách!');
+                document.getElementById('bookId').focus();
+                return false;
+            }
+            
+            if (!readerId) {
+                e.preventDefault();
+                alert('Vui lòng chọn độc giả!');
+                document.getElementById('readerId').focus();
+                return false;
+            }
+            
+            if (!borrowDate) {
+                e.preventDefault();
+                alert('Vui lòng chọn ngày mượn!');
+                document.getElementById('borrowDate').focus();
+                return false;
+            }
+            
+            if (!dueDate) {
+                e.preventDefault();
+                alert('Vui lòng chọn hạn trả!');
+                document.getElementById('dueDate').focus();
+                return false;
+            }
+            
+            if (new Date(dueDate) <= new Date(borrowDate)) {
+                e.preventDefault();
+                alert('Hạn trả phải sau ngày mượn!');
+                document.getElementById('dueDate').focus();
+                return false;
+            }
+        });
+
+        // Auto-calculate due date based on borrow date
+        document.getElementById('borrowDate').addEventListener('change', function(e) {
+            const borrowDate = new Date(e.target.value);
+            const dueDate = new Date(borrowDate);
+            dueDate.setDate(dueDate.getDate() + 14);
+            
+            const dueDateInput = document.getElementById('dueDate');
+            dueDateInput.value = dueDate.toISOString().split('T')[0];
+        });
+    </script>
+</body>
+</html> 

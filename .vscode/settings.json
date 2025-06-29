@@ -21,7 +21,7 @@
     "files.autoSave": "afterDelay",
     "liveServer.settings.donotShowInfoMsg": true,
     "terminal.integrated.enableMultiLinePasteWarning": "never",
-    "java.jdt.ls.java.home": "/usr/local/sdkman/candidates/java/11.0.21-tem",
     "git.enableCommitSigning": false,
-    "git.confirmSync": false
+    "git.confirmSync": false,
+    "java.compile.nullAnalysis.mode": "automatic"
 }

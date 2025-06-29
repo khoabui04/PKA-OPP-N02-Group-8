@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head}">
+    <title th:text="${book.id != null ? 'Chỉnh sửa sách' : 'Thêm sách mới'} + ' - Hệ thống quản lý thư viện'">Thêm sách - Hệ thống quản lý thư viện</title>
+</head>
+<body>
+    <div th:replace="~{layout/base :: body}">
+        <div th:fragment="content">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>
+                    <i class="bi bi-book me-2"></i>
+                    <span th:text="${book.id != null ? 'Chỉnh sửa sách' : 'Thêm sách mới'}">Thêm sách mới</span>
+                </h2>
+                <a href="/books" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-2"></i>Quay lại
+                </a>
+            </div>
+
+            <!-- Error Messages -->
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle me-2"></i>
+                <span th:text="${error}">Có lỗi xảy ra!</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <!-- Book Form -->
+            <div class="card">
+                <div class="card-body">
+                    <form th:action="@{/books}" th:object="${book}" method="post" class="needs-validation" novalidate>
+                        <input type="hidden" th:field="*{id}">
+                        
+                        <div class="row">
+                            <!-- Basic Information -->
+                            <div class="col-md-8">
+                                <h5 class="card-title mb-3">
+                                    <i class="bi bi-info-circle me-2"></i>Thông tin cơ bản
+                                </h5>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="title" class="form-label">Tiêu đề sách <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="title" th:field="*{title}" 
+                                               th:classappend="${#fields.hasErrors('title') ? 'is-invalid' : ''}"
+                                               placeholder="Nhập tiêu đề sách" required>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                                            Vui lòng nhập tiêu đề sách
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="author" class="form-label">Tác giả <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="author" th:field="*{author}"
+                                               th:classappend="${#fields.hasErrors('author') ? 'is-invalid' : ''}"
+                                               placeholder="Nhập tên tác giả" required>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">
+                                            Vui lòng nhập tên tác giả
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="isbn" class="form-label">ISBN</label>
+                                        <input type="text" class="form-control" id="isbn" th:field="*{isbn}"
+                                               th:classappend="${#fields.hasErrors('isbn') ? 'is-invalid' : ''}"
+                                               placeholder="Nhập mã ISBN (tùy chọn)">
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">
+                                            ISBN không hợp lệ
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="category" class="form-label">Thể loại <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="category" th:field="*{category}"
+                                                th:classappend="${#fields.hasErrors('category') ? 'is-invalid' : ''}" required>
+                                            <option value="">Chọn thể loại</option>
+                                            <option th:each="cat : ${categories}" 
+                                                    th:value="${cat}" 
+                                                    th:text="${cat}">Thể loại</option>
+                                        </select>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">
+                                            Vui lòng chọn thể loại
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="publisher" class="form-label">Nhà xuất bản</label>
+                                        <input type="text" class="form-control" id="publisher" th:field="*{publisher}"
+                                               placeholder="Nhập tên nhà xuất bản">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="publicationYear" class="form-label">Năm xuất bản</label>
+                                        <input type="number" class="form-control" id="publicationYear" th:field="*{publicationYear}"
+                                               min="1900" max="2024" placeholder="Nhập năm xuất bản">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="quantity" class="form-label">Số lượng <span class="text-danger">*</span></label>
+                                        <input type="number" class="form-control" id="quantity" th:field="*{quantity}"
+                                               th:classappend="${#fields.hasErrors('quantity') ? 'is-invalid' : ''}"
+                                               min="1" placeholder="Nhập số lượng sách" required>
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">
+                                            Số lượng phải lớn hơn 0
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="shelfLocation" class="form-label">Vị trí kệ</label>
+                                        <input type="text" class="form-control" id="shelfLocation" th:field="*{shelfLocation}"
+                                               placeholder="Ví dụ: A1-B2-C3">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Mô tả</label>
+                                    <textarea class="form-control" id="description" th:field="*{description}" 
+                                              rows="4" placeholder="Nhập mô tả về sách"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Additional Information -->
+                            <div class="col-md-4">
+                                <h5 class="card-title mb-3">
+                                    <i class="bi bi-gear me-2"></i>Thông tin bổ sung
+                                </h5>
+
+                                <div class="mb-3">
+                                    <label for="status" class="form-label">Trạng thái</label>
+                                    <select class="form-select" id="status" th:field="*{status}">
+                                        <option th:each="status : ${T(com.phenikaa.library.model.Book$BookStatus).values()}"
+                                                th:value="${status}" 
+                                                th:text="${status.displayName}">Trạng thái</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="availableQuantity" class="form-label">Số lượng có sẵn</label>
+                                    <input type="number" class="form-control" id="availableQuantity" th:field="*{availableQuantity}"
+                                           min="0" th:max="*{quantity}" placeholder="Số lượng có sẵn">
+                                    <small class="form-text text-muted">Để trống để tự động tính theo số lượng tổng</small>
+                                </div>
+
+                                <!-- Preview Card -->
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Xem trước</h6>
+                                        <div class="mb-2">
+                                            <strong>Tiêu đề:</strong>
+                                            <span id="previewTitle" class="text-muted">Chưa nhập</span>
+                                        </div>
+                                        <div class="mb-2">
+                                            <strong>Tác giả:</strong>
+                                            <span id="previewAuthor" class="text-muted">Chưa nhập</span>
+                                        </div>
+                                        <div class="mb-2">
+                                            <strong>Thể loại:</strong>
+                                            <span id="previewCategory" class="text-muted">Chưa chọn</span>
+                                        </div>
+                                        <div class="mb-2">
+                                            <strong>Số lượng:</strong>
+                                            <span id="previewQuantity" class="text-muted">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                            <a href="/books" class="btn btn-secondary">
+                                <i class="bi bi-x-circle me-2"></i>Hủy
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>
+                                <span th:text="${book.id != null ? 'Cập nhật' : 'Thêm sách'}">Thêm sách</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form validation
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        // Live preview
+        document.getElementById('title').addEventListener('input', function() {
+            document.getElementById('previewTitle').textContent = this.value || 'Chưa nhập';
+        });
+
+        document.getElementById('author').addEventListener('input', function() {
+            document.getElementById('previewAuthor').textContent = this.value || 'Chưa nhập';
+        });
+
+        document.getElementById('category').addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            document.getElementById('previewCategory').textContent = selectedOption.text || 'Chưa chọn';
+        });
+
+        document.getElementById('quantity').addEventListener('input', function() {
+            document.getElementById('previewQuantity').textContent = this.value || '0';
+        });
+
+        // Auto-calculate available quantity
+        document.getElementById('quantity').addEventListener('input', function() {
+            const quantity = parseInt(this.value) || 0;
+            const availableInput = document.getElementById('availableQuantity');
+            if (!availableInput.value) {
+                availableInput.value = quantity;
+            }
+        });
+    </script>
+</body>
+</html> 
