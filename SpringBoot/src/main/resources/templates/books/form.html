@@ -17,11 +17,7 @@
             </div>
 
             <!-- Error Messages -->
-            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="bi bi-exclamation-triangle me-2"></i>
-                <span th:text="${error}">Có lỗi xảy ra!</span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
 
             <!-- Book Form -->
             <div class="card">
@@ -228,4 +224,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
