@@ -179,4 +179,13 @@ public class BookService {
         }
         return false;
     }
+
+    public List<Book> advancedSearch(String title, String author, String category, String isbn) {
+        return bookRepository.findByAdvancedSearch(
+            title != null ? title : "",
+            author != null ? author : "",
+            category != null ? category : "",
+            isbn != null ? isbn : ""
+        );
+    }
 }
