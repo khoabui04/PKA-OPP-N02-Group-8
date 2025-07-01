@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head}">
+    <title>Không tìm thấy trang - Hệ thống quản lý thư viện</title>
+</head>
+<body>
+    <div th:replace="~{layout/base :: body}">
+        <div th:fragment="content">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 text-center">
+                        <div class="error-page">
+                            <div class="error-code">
+                                <h1 class="display-1 text-muted">404</h1>
+                            </div>
+                            <div class="error-message">
+                                <h2 class="mb-3">Không tìm thấy trang</h2>
+                                <p class="lead text-muted mb-4">
+                                    Trang bạn đang tìm kiếm không tồn tại hoặc đã được di chuyển.
+                                </p>
+                            </div>
+                            
+                            <div class="error-actions mb-4">
+                                <a href="/" class="btn btn-primary me-3">
+                                    <i class="bi bi-house me-2"></i>Về trang chủ
+                                </a>
+                                <button class="btn btn-outline-secondary" onclick="history.back()">
+                                    <i class="bi bi-arrow-left me-2"></i>Quay lại
+                                </button>
+                            </div>
+
+                            <div class="error-help">
+                                <h5 class="mb-3">Bạn có thể thử:</h5>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <i class="bi bi-search text-primary fs-1 mb-3"></i>
+                                                <h6>Kiểm tra URL</h6>
+                                                <p class="text-muted small">Đảm bảo địa chỉ trang web được nhập chính xác</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <i class="bi bi-arrow-clockwise text-primary fs-1 mb-3"></i>
+                                                <h6>Làm mới trang</h6>
+                                                <p class="text-muted small">Nhấn F5 hoặc Ctrl+R để tải lại trang</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <i class="bi bi-envelope text-primary fs-1 mb-3"></i>
+                                                <h6>Liên hệ hỗ trợ</h6>
+                                                <p class="text-muted small">Gửi email cho đội ngũ kỹ thuật</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="error-links mt-4">
+                                <h6 class="mb-3">Các trang phổ biến:</h6>
+                                <div class="d-flex justify-content-center flex-wrap gap-2">
+                                    <a href="/books" class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-book me-1"></i>Quản lý sách
+                                    </a>
+                                    <a href="/readers" class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-person me-1"></i>Quản lý độc giả
+                                    </a>
+                                    <a href="/borrowings" class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-arrow-down-circle me-1"></i>Giao dịch mượn
+                                    </a>
+                                    <a href="/reports" class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-graph-up me-1"></i>Báo cáo
+                                    </a>
+                                    <a href="/settings" class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-gear me-1"></i>Cài đặt
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="error-contact mt-4">
+                                <p class="text-muted">
+                                    Nếu vấn đề vẫn tiếp tục, vui lòng liên hệ: 
+                                    <a href="mailto:support@phenikaa.edu.vn">support@phenikaa.edu.vn</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:replace="~{layout/base :: scripts}"></script>
+    <style>
+        .error-page {
+            padding: 60px 0;
+        }
+        .error-code {
+            margin-bottom: 30px;
+        }
+        .error-code h1 {
+            font-size: 8rem;
+            font-weight: bold;
+            color: #6c757d;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .error-message h2 {
+            color: #495057;
+        }
+        .error-help .card {
+            border: 1px solid #dee2e6;
+            transition: transform 0.2s;
+        }
+        .error-help .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .error-links .btn {
+            transition: all 0.2s;
+        }
+        .error-links .btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+    <script>
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate the 404 number
+            const errorCode = document.querySelector('.error-code h1');
+            errorCode.style.opacity = '0';
+            errorCode.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                errorCode.style.transition = 'all 0.5s ease';
+                errorCode.style.opacity = '1';
+                errorCode.style.transform = 'translateY(0)';
+            }, 100);
+
+            // Add click tracking for analytics
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    console.log('User clicked:', this.href);
+                });
+            });
+        });
+
+        // Search functionality
+        function searchPage() {
+            const searchTerm = prompt('Nhập từ khóa tìm kiếm:');
+            if (searchTerm) {
+                // In a real application, you would redirect to search results
+                console.log('Searching for:', searchTerm);
+                alert('Chức năng tìm kiếm sẽ được cập nhật sau!');
+            }
+        }
+
+        // Report broken link
+        function reportBrokenLink() {
+            const currentUrl = window.location.href;
+            const emailSubject = 'Báo cáo link hỏng - 404 Error';
+            const emailBody = `Tôi gặp lỗi 404 tại trang: ${currentUrl}\n\nMô tả vấn đề: `;
+            
+            window.location.href = `mailto:support@phenikaa.edu.vn?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+        }
+    </script>
+</body>
+</html> 

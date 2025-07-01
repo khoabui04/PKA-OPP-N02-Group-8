@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head}">
+    <title>Thông tin thủ thư - Hệ thống quản lý thư viện</title>
+</head>
+<body>
+    <div th:replace="~{layout/base :: body}">
+        <div th:fragment="content">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="bi bi-person-circle me-2"></i>Thông tin thủ thư</h2>
+                <a href="/" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left me-2"></i>Quay lại Dashboard
+                </a>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- Profile Card -->
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div class="mb-3">
+                                <img src="https://via.placeholder.com/150x150/007bff/ffffff?text=TT" 
+                                     class="rounded-circle" alt="Avatar" width="150" height="150">
+                            </div>
+                            <h5 class="card-title" th:text="${librarian.name}">Nguyễn Văn Thủ thư</h5>
+                            <p class="text-muted" th:text="${librarian.role}">Thủ thư chính</p>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="editProfile()">
+                                    <i class="bi bi-pencil me-2"></i>Chỉnh sửa thông tin
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm" onclick="changePassword()">
+                                    <i class="bi bi-key me-2"></i>Đổi mật khẩu
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="uploadAvatar()">
+                                    <i class="bi bi-camera me-2"></i>Thay đổi ảnh đại diện
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h6 class="mb-0">Thống kê công việc</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <h5 class="text-primary">156</h5>
+                                    <small class="text-muted">Giao dịch hôm nay</small>
+                                </div>
+                                <div class="col-6">
+                                    <h5 class="text-success">1,234</h5>
+                                    <small class="text-muted">Giao dịch tháng này</small>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <h5 class="text-warning">23</h5>
+                                    <small class="text-muted">Sách quá hạn</small>
+                                </div>
+                                <div class="col-6">
+                                    <h5 class="text-info">89</h5>
+                                    <small class="text-muted">Độc giả mới</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <!-- Personal Information -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0">Thông tin cá nhân</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <th width="40%">Họ và tên:</th>
+                                            <td th:text="${librarian.name}">Nguyễn Văn Thủ thư</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email:</th>
+                                            <td th:text="${librarian.email}">thuthu@phenikaa.edu.vn</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số điện thoại:</th>
+                                            <td th:text="${librarian.phone}">0123456789</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Chức vụ:</th>
+                                            <td th:text="${librarian.role}">Thủ thư chính</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <th width="40%">Mã nhân viên:</th>
+                                            <td>NV001</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ngày vào làm:</th>
+                                            <td th:text="${#temporals.format(librarian.joinDate, 'dd/MM/yyyy')}">01/01/2020</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Trạng thái:</th>
+                                            <td><span class="badge bg-success">Đang làm việc</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Quyền hạn:</th>
+                                            <td><span class="badge bg-primary">Quản trị viên</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Work Schedule -->
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h6 class="mb-0">Lịch làm việc</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Thứ</th>
+                                            <th>Giờ làm việc</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Thứ 2</td>
+                                            <td>08:00 - 17:00</td>
+                                            <td><span class="badge bg-success">Làm việc</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Thứ 3</td>
+                                            <td>08:00 - 17:00</td>
+                                            <td><span class="badge bg-success">Làm việc</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Thứ 4</td>
+                                            <td>08:00 - 17:00</td>
+                                            <td><span class="badge bg-success">Làm việc</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Thứ 5</td>
+                                            <td>08:00 - 17:00</td>
+                                            <td><span class="badge bg-success">Làm việc</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Thứ 6</td>
+                                            <td>08:00 - 17:00</td>
+                                            <td><span class="badge bg-success">Làm việc</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Thứ 7</td>
+                                            <td>08:00 - 12:00</td>
+                                            <td><span class="badge bg-warning">Nửa ngày</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Chủ nhật</td>
+                                            <td>-</td>
+                                            <td><span class="badge bg-secondary">Nghỉ</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activities -->
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h6 class="mb-0">Hoạt động gần đây</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-marker bg-primary"></div>
+                                    <div class="timeline-content">
+                                        <h6 class="mb-1">Xử lý mượn sách</h6>
+                                        <p class="mb-1">Nguyễn Văn A mượn sách "Java Programming"</p>
+                                        <small class="text-muted">2 giờ trước</small>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker bg-success"></div>
+                                    <div class="timeline-content">
+                                        <h6 class="mb-1">Xử lý trả sách</h6>
+                                        <p class="mb-1">Trần Thị B trả sách "Spring Framework"</p>
+                                        <small class="text-muted">4 giờ trước</small>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker bg-warning"></div>
+                                    <div class="timeline-content">
+                                        <h6 class="mb-1">Gia hạn sách</h6>
+                                        <p class="mb-1">Lê Văn C gia hạn sách "Database Design"</p>
+                                        <small class="text-muted">6 giờ trước</small>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker bg-info"></div>
+                                    <div class="timeline-content">
+                                        <h6 class="mb-1">Thêm sách mới</h6>
+                                        <p class="mb-1">Thêm sách "Web Development" vào hệ thống</p>
+                                        <small class="text-muted">1 ngày trước</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Profile Modal -->
+            <div class="modal fade" id="editProfileModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Chỉnh sửa thông tin</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editProfileForm">
+                                <div class="mb-3">
+                                    <label for="editName" class="form-label">Họ và tên</label>
+                                    <input type="text" class="form-control" id="editName" th:value="${librarian.name}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="editEmail" th:value="${librarian.email}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editPhone" class="form-label">Số điện thoại</label>
+                                    <input type="tel" class="form-control" id="editPhone" th:value="${librarian.phone}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editRole" class="form-label">Chức vụ</label>
+                                    <input type="text" class="form-control" id="editRole" th:value="${librarian.role}">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                            <button type="button" class="btn btn-primary" onclick="saveProfile()">Lưu thay đổi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Change Password Modal -->
+            <div class="modal fade" id="changePasswordModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Đổi mật khẩu</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="changePasswordForm">
+                                <div class="mb-3">
+                                    <label for="currentPassword" class="form-label">Mật khẩu hiện tại</label>
+                                    <input type="password" class="form-control" id="currentPassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="newPassword" class="form-label">Mật khẩu mới</label>
+                                    <input type="password" class="form-control" id="newPassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Xác nhận mật khẩu mới</label>
+                                    <input type="password" class="form-control" id="confirmPassword">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                            <button type="button" class="btn btn-primary" onclick="savePassword()">Đổi mật khẩu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:replace="~{layout/base :: scripts}"></script>
+    <style>
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .timeline-marker {
+            position: absolute;
+            left: -35px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .timeline-item:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: -29px;
+            top: 17px;
+            width: 2px;
+            height: calc(100% + 3px);
+            background-color: #dee2e6;
+        }
+    </style>
+    <script>
+        function editProfile() {
+            new bootstrap.Modal(document.getElementById('editProfileModal')).show();
+        }
+
+        function changePassword() {
+            new bootstrap.Modal(document.getElementById('changePasswordModal')).show();
+        }
+
+        function uploadAvatar() {
+            // In a real application, you would open a file picker
+            alert('Chức năng thay đổi ảnh đại diện sẽ được cập nhật sau!');
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('editName').value;
+            const email = document.getElementById('editEmail').value;
+            const phone = document.getElementById('editPhone').value;
+            const role = document.getElementById('editRole').value;
+
+            if (!name || !email || !phone || !role) {
+                alert('Vui lòng điền đầy đủ thông tin!');
+                return;
+            }
+
+            // In a real application, you would make an AJAX call to save profile
+            console.log('Saving profile:', { name, email, phone, role });
+            
+            // Update the displayed information
+            document.querySelector('.card-title').textContent = name;
+            document.querySelector('td[th\\:text*="librarian.name"]').textContent = name;
+            document.querySelector('td[th\\:text*="librarian.email"]').textContent = email;
+            document.querySelector('td[th\\:text*="librarian.phone"]').textContent = phone;
+            document.querySelector('td[th\\:text*="librarian.role"]').textContent = role;
+
+            bootstrap.Modal.getInstance(document.getElementById('editProfileModal')).hide();
+            alert('Thông tin đã được cập nhật thành công!');
+        }
+
+        function savePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                alert('Vui lòng điền đầy đủ thông tin!');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                alert('Mật khẩu xác nhận không khớp!');
+                return;
+            }
+
+            if (newPassword.length < 8) {
+                alert('Mật khẩu mới phải có ít nhất 8 ký tự!');
+                return;
+            }
+
+            // In a real application, you would make an AJAX call to change password
+            console.log('Changing password:', { currentPassword, newPassword });
+            
+            // Clear form
+            document.getElementById('changePasswordForm').reset();
+            bootstrap.Modal.getInstance(document.getElementById('changePasswordModal')).hide();
+            alert('Mật khẩu đã được thay đổi thành công!');
+        }
+    </script>
+</body>
+</html> 

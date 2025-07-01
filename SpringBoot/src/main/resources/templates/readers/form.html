@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head}">
+    <title>Thêm/Chỉnh sửa độc giả - Hệ thống quản lý thư viện</title>
+</head>
+<body>
+    <div th:replace="~{layout/base :: body}">
+        <div th:fragment="content">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>
+                    <i class="bi bi-person me-2"></i>
+                    <span th:if="${reader.id == null}">Thêm độc giả mới</span>
+                    <span th:unless="${reader.id == null}">Chỉnh sửa độc giả</span>
+                </h2>
+                <a href="/readers" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left me-2"></i>Quay lại
+                </a>
+            </div>
+
+            <!-- Error Messages -->
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <span th:text="${error}">Có lỗi xảy ra!</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Thông tin độc giả</h5>
+                        </div>
+                        <div class="card-body">
+                            <form th:action="@{/readers}" th:object="${reader}" method="post">
+                                <input type="hidden" th:field="*{id}" />
+
+                                <!-- ... các trường như Họ tên, Email, SĐT, v.v ... (không thay đổi) -->
+
+                                <!-- (Giữ nguyên form cũ - đã có trong câu hỏi, không dán lại toàn bộ để tránh dài) -->
+
+                                <div class="d-flex justify-content-end gap-2">
+                                    <a href="/readers" class="btn btn-secondary">Hủy</a>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="bi bi-check-circle me-2"></i>
+                                        <span th:if="${reader.id == null}">Thêm độc giả</span>
+                                        <span th:unless="${reader.id == null}">Cập nhật</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- 🔽 PHẦN BỔ SUNG FORM ĐƯỢC THÊM TẠI ĐÂY -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Form bổ sung nhanh</h5>
+                        </div>
+                        <div class="card-body">
+                            <form th:action="@{/readers/save}" th:object="${reader}" method="post" class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Họ tên</label>
+                                    <input type="text" class="form-control" th:field="*{name}" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" th:field="*{email}" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Số điện thoại</label>
+                                    <input type="text" class="form-control" th:field="*{phone}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" th:field="*{address}">
+                                </div>
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Lưu</button>
+                                    <a th:href="@{/readers}" class="btn btn-secondary ms-2">Quay lại</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- 🔼 KẾT THÚC PHẦN FORM BỔ SUNG -->
+
+                </div>
+
+                <!-- Cột bên phải giữ nguyên (hướng dẫn, loại độc giả, trạng thái) -->
+                <div class="col-md-4">
+                    <!-- Card Hướng dẫn, Loại độc giả, Trạng thái độc giả -->
+                    <!-- ... (như mã gốc) -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:replace="~{layout/base :: scripts}"></script>
+    <script>
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) {
+                value = value.substring(0, 11);
+            }
+            e.target.value = value;
+        });
+
+        document.getElementById('studentId').addEventListener('input', function(e) {
+            let value = e.target.value.toUpperCase();
+            e.target.value = value;
+        });
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            if (!name) {
+                e.preventDefault();
+                alert('Vui lòng nhập họ và tên!');
+                document.getElementById('name').focus();
+                return false;
+            }
+
+            if (!email) {
+                e.preventDefault();
+                alert('Vui lòng nhập email!');
+                document.getElementById('email').focus();
+                return false;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                e.preventDefault();
+                alert('Email không hợp lệ!');
+                document.getElementById('email').focus();
+                return false;
+            }
+        });
+    </script>
+</body>
+</html>

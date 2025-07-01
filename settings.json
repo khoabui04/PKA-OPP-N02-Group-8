@@ -1,0 +1,7 @@
+{
+    "liveServer.settings.multiRootWorkspaceName": "PKA-OPP-N02-Group-8",
+    "java.project.sourcePaths": [
+        "src/main/java/library"
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
+}

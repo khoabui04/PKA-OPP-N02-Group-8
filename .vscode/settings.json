@@ -1,0 +1,28 @@
+{
+    "workbench.editor.empty.hint": "hidden",
+    "git.enableSmartCommit": true,
+    "terminal.integrated.sendKeybindingsToShell": true,
+    "terminal.integrated.commandsToSkipShell": [
+        ""
+    ],
+    "database-client.autoSync": true,
+    "editor.linkedEditing": true,
+    "redhat.telemetry.enabled": true,
+    "git.autofetch": true,
+    "bitoAI.appearance.fontSize (Match with IDE Font)": false,
+    "workbench.editorAssociations": {
+        "*.copilotmd": "vscode.markdown.preview.editor",
+        "*.class": "default",
+        "*.docx": "default"
+    },
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "git.openRepositoryInParentFolders": "always",
+    "explorer.confirmDragAndDrop": false,
+    "files.autoSave": "afterDelay",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "git.enableCommitSigning": false,
+    "git.confirmSync": false,
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

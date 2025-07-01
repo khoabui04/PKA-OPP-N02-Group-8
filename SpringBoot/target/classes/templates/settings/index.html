@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head}">
+    <title>Cài đặt hệ thống - Hệ thống quản lý thư viện</title>
+</head>
+<body>
+    <div th:replace="~{layout/base :: body}">
+        <div th:fragment="content">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="bi bi-gear me-2"></i>Cài đặt hệ thống</h2>
+                <a href="/" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left me-2"></i>Quay lại Dashboard
+                </a>
+            </div>
+
+            <!-- Settings Navigation -->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0">Danh mục cài đặt</h6>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <a href="#general" class="list-group-item list-group-item-action active" data-bs-toggle="list">
+                                <i class="bi bi-gear me-2"></i>Cài đặt chung
+                            </a>
+                            <a href="#borrowing" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                                <i class="bi bi-arrow-down-circle me-2"></i>Quy định mượn sách
+                            </a>
+                            <a href="#notifications" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                                <i class="bi bi-bell me-2"></i>Thông báo
+                            </a>
+                            <a href="#security" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                                <i class="bi bi-shield-lock me-2"></i>Bảo mật
+                            </a>
+                            <a href="#backup" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                                <i class="bi bi-cloud-arrow-up me-2"></i>Sao lưu & Khôi phục
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <!-- General Settings -->
+                        <div class="tab-pane fade show active" id="general">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Cài đặt chung</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form id="generalForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="libraryName" class="form-label">Tên thư viện</label>
+                                                    <input type="text" class="form-control" id="libraryName" value="Thư viện Đại học Phenikaa">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="libraryAddress" class="form-label">Địa chỉ</label>
+                                                    <input type="text" class="form-control" id="libraryAddress" value="Yên Nghĩa, Hà Đông, Hà Nội">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="libraryPhone" class="form-label">Số điện thoại</label>
+                                                    <input type="tel" class="form-control" id="libraryPhone" value="024 1234 5678">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="libraryEmail" class="form-label">Email</label>
+                                                    <input type="email" class="form-control" id="libraryEmail" value="thuvien@phenikaa.edu.vn">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="timezone" class="form-label">Múi giờ</label>
+                                                    <select class="form-select" id="timezone">
+                                                        <option value="Asia/Ho_Chi_Minh" selected>Asia/Ho_Chi_Minh (GMT+7)</option>
+                                                        <option value="UTC">UTC (GMT+0)</option>
+                                                        <option value="America/New_York">America/New_York (GMT-5)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="language" class="form-label">Ngôn ngữ</label>
+                                                    <select class="form-select" id="language">
+                                                        <option value="vi" selected>Tiếng Việt</option>
+                                                        <option value="en">English</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="libraryDescription" class="form-label">Mô tả thư viện</label>
+                                            <textarea class="form-control" id="libraryDescription" rows="3">Thư viện Đại học Phenikaa - Nơi lưu trữ và chia sẻ tri thức</textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-check-circle me-2"></i>Lưu cài đặt
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Borrowing Rules -->
+                        <div class="tab-pane fade" id="borrowing">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Quy định mượn sách</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form id="borrowingForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="defaultBorrowDays" class="form-label">Thời hạn mượn mặc định (ngày)</label>
+                                                    <input type="number" class="form-control" id="defaultBorrowDays" value="14" min="1" max="90">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="maxRenewals" class="form-label">Số lần gia hạn tối đa</label>
+                                                    <input type="number" class="form-control" id="maxRenewals" value="2" min="0" max="10">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="finePerDay" class="form-label">Phạt quá hạn (VNĐ/ngày)</label>
+                                                    <input type="number" class="form-control" id="finePerDay" value="5000" min="0">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="maxBooksPerReader" class="form-label">Số sách tối đa/độc giả</label>
+                                                    <input type="number" class="form-control" id="maxBooksPerReader" value="5" min="1" max="20">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Loại độc giả</label>
+                                            <div class="table-responsive">
+                                                <table class="table table-sm">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Loại</th>
+                                                            <th>Số sách tối đa</th>
+                                                            <th>Thời hạn (ngày)</th>
+                                                            <th>Phí thẻ (VNĐ)</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Sinh viên</td>
+                                                            <td><input type="number" class="form-control form-control-sm" value="5" min="1"></td>
+                                                            <td><input type="number" class="form-control form-control-sm" value="14" min="1"></td>
+                                                            <td><input type="number" class="form-control form-control-sm" value="50000" min="0"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Giảng viên</td>
+                                                            <td><input type="number" class="form-control form-control-sm" value="10" min="1"></td>
+                                                            <td><input type="number" class="form-control form-control-sm" value="30" min="1"></td>
+                                                            <td><input type="number" class="form-control form-control-sm" value="100000" min="0"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Nhân viên</td>
+                                                            <td><input type="number" class="form-control form-control-sm" value="7" min="1"></td>
+                                                            <td><input type="number" class="form-control form-control-sm" value="21" min="1"></td>
+                                                            <td><input type="number" class="form-control form-control-sm" value="75000" min="0"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Bên ngoài</td>
+                                                            <td><input type="number" class="form-control form-control-sm" value="3" min="1"></td>
+                                                            <td><input type="number" class="form-control form-control-sm" value="7" min="1"></td>
+                                                            <td><input type="number" class="form-control form-control-sm" value="200000" min="0"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-check-circle me-2"></i>Lưu quy định
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notifications -->
+                        <div class="tab-pane fade" id="notifications">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Cài đặt thông báo</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form id="notificationForm">
+                                        <div class="mb-3">
+                                            <label class="form-label">Thông báo qua email</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="emailOverdue" checked>
+                                                <label class="form-check-label" for="emailOverdue">
+                                                    Thông báo sách quá hạn
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="emailDueSoon" checked>
+                                                <label class="form-check-label" for="emailDueSoon">
+                                                    Thông báo sắp đến hạn (3 ngày trước)
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="emailNewBook">
+                                                <label class="form-check-label" for="emailNewBook">
+                                                    Thông báo sách mới
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Thông báo trong hệ thống</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="systemOverdue" checked>
+                                                <label class="form-check-label" for="systemOverdue">
+                                                    Hiển thị sách quá hạn trên dashboard
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="systemStats" checked>
+                                                <label class="form-check-label" for="systemStats">
+                                                    Hiển thị thống kê real-time
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="notificationDays" class="form-label">Số ngày cảnh báo trước hạn</label>
+                                            <input type="number" class="form-control" id="notificationDays" value="3" min="1" max="7">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-check-circle me-2"></i>Lưu cài đặt
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security -->
+                        <div class="tab-pane fade" id="security">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Cài đặt bảo mật</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form id="securityForm">
+                                        <div class="mb-3">
+                                            <label for="sessionTimeout" class="form-label">Thời gian timeout phiên làm việc (phút)</label>
+                                            <input type="number" class="form-control" id="sessionTimeout" value="30" min="5" max="480">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="maxLoginAttempts" class="form-label">Số lần đăng nhập sai tối đa</label>
+                                            <input type="number" class="form-control" id="maxLoginAttempts" value="5" min="3" max="10">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="lockoutDuration" class="form-label">Thời gian khóa tài khoản (phút)</label>
+                                            <input type="number" class="form-control" id="lockoutDuration" value="15" min="5" max="1440">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Yêu cầu mật khẩu</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="requireUppercase" checked>
+                                                <label class="form-check-label" for="requireUppercase">
+                                                    Có ít nhất 1 chữ hoa
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="requireLowercase" checked>
+                                                <label class="form-check-label" for="requireLowercase">
+                                                    Có ít nhất 1 chữ thường
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="requireNumber" checked>
+                                                <label class="form-check-label" for="requireNumber">
+                                                    Có ít nhất 1 số
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="requireSpecial" checked>
+                                                <label class="form-check-label" for="requireSpecial">
+                                                    Có ít nhất 1 ký tự đặc biệt
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="minPasswordLength" class="form-label">Độ dài mật khẩu tối thiểu</label>
+                                            <input type="number" class="form-control" id="minPasswordLength" value="8" min="6" max="20">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-check-circle me-2"></i>Lưu cài đặt
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Backup & Restore -->
+                        <div class="tab-pane fade" id="backup">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Sao lưu & Khôi phục</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h6 class="mb-0">Sao lưu dữ liệu</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="text-muted">Tạo bản sao lưu toàn bộ dữ liệu hệ thống</p>
+                                                    <div class="mb-3">
+                                                        <label for="backupType" class="form-label">Loại sao lưu</label>
+                                                        <select class="form-select" id="backupType">
+                                                            <option value="full">Sao lưu đầy đủ</option>
+                                                            <option value="incremental">Sao lưu tăng dần</option>
+                                                            <option value="differential">Sao lưu khác biệt</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="backupLocation" class="form-label">Vị trí lưu trữ</label>
+                                                        <input type="text" class="form-control" id="backupLocation" value="/backups/">
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary" onclick="createBackup()">
+                                                        <i class="bi bi-cloud-arrow-up me-2"></i>Tạo bản sao lưu
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h6 class="mb-0">Khôi phục dữ liệu</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="text-muted">Khôi phục dữ liệu từ bản sao lưu</p>
+                                                    <div class="mb-3">
+                                                        <label for="backupFile" class="form-label">Chọn file sao lưu</label>
+                                                        <input type="file" class="form-control" id="backupFile" accept=".sql,.zip,.bak">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="overwriteData">
+                                                            <label class="form-check-label" for="overwriteData">
+                                                                Ghi đè dữ liệu hiện tại
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-warning" onclick="restoreBackup()">
+                                                        <i class="bi bi-cloud-arrow-down me-2"></i>Khôi phục
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="card mt-4">
+                                        <div class="card-header">
+                                            <h6 class="mb-0">Lịch sử sao lưu</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-sm">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Ngày tạo</th>
+                                                            <th>Loại</th>
+                                                            <th>Kích thước</th>
+                                                            <th>Trạng thái</th>
+                                                            <th>Thao tác</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>01/01/2024 10:00</td>
+                                                            <td>Sao lưu đầy đủ</td>
+                                                            <td>15.2 MB</td>
+                                                            <td><span class="badge bg-success">Thành công</span></td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-outline-primary">Tải xuống</button>
+                                                                <button class="btn btn-sm btn-outline-danger">Xóa</button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>31/12/2023 23:00</td>
+                                                            <td>Sao lưu tăng dần</td>
+                                                            <td>2.1 MB</td>
+                                                            <td><span class="badge bg-success">Thành công</span></td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-outline-primary">Tải xuống</button>
+                                                                <button class="btn btn-sm btn-outline-danger">Xóa</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:replace="~{layout/base :: scripts}"></script>
+    <script>
+        // Form submission handlers
+        document.getElementById('generalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            saveSettings('general');
+        });
+
+        document.getElementById('borrowingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            saveSettings('borrowing');
+        });
+
+        document.getElementById('notificationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            saveSettings('notifications');
+        });
+
+        document.getElementById('securityForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            saveSettings('security');
+        });
+
+        function saveSettings(type) {
+            // In a real application, you would make an AJAX call to save settings
+            console.log('Saving settings:', type);
+            
+            // Show success message
+            const button = event.target.querySelector('button[type="submit"]');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Đang lưu...';
+            button.disabled = true;
+
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.disabled = false;
+                alert('Cài đặt đã được lưu thành công!');
+            }, 1000);
+        }
+
+        function createBackup() {
+            const backupType = document.getElementById('backupType').value;
+            const backupLocation = document.getElementById('backupLocation').value;
+
+            if (!backupLocation.trim()) {
+                alert('Vui lòng nhập vị trí lưu trữ!');
+                return;
+            }
+
+            // In a real application, you would make an AJAX call to create backup
+            console.log('Creating backup:', { backupType, backupLocation });
+            
+            alert('Bản sao lưu đang được tạo. Vui lòng chờ...');
+        }
+
+        function restoreBackup() {
+            const backupFile = document.getElementById('backupFile').files[0];
+            const overwriteData = document.getElementById('overwriteData').checked;
+
+            if (!backupFile) {
+                alert('Vui lòng chọn file sao lưu!');
+                return;
+            }
+
+            if (overwriteData) {
+                if (!confirm('Bạn có chắc chắn muốn ghi đè dữ liệu hiện tại? Hành động này không thể hoàn tác!')) {
+                    return;
+                }
+            }
+
+            // In a real application, you would make an AJAX call to restore backup
+            console.log('Restoring backup:', { backupFile, overwriteData });
+            
+            alert('Dữ liệu đang được khôi phục. Vui lòng chờ...');
+        }
+
+        // Auto-save settings when values change
+        document.querySelectorAll('input, select, textarea').forEach(element => {
+            element.addEventListener('change', function() {
+                // In a real application, you could auto-save or show a "Save" button
+                console.log('Setting changed:', this.id, this.value);
+            });
+        });
+    </script>
+</body>
+</html> 
